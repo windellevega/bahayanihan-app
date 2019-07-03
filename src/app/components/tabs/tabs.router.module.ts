@@ -17,6 +17,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'map-tab',
+        children: [
+          {
+            path: '',
+            loadChildren: '../map-tab/map-tab.module#MapTabPageModule'
+          }
+        ]
+      },
+      {
         path: 'transactions-tab',
         children: [
           {
