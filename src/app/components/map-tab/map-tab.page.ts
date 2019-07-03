@@ -18,7 +18,7 @@ export class MapTabPage implements OnInit {
   }
 
   loadLeafletMap() {
-    this.map = new Map('map').setView([28.644800, 77.216721], 10);
+    this.map = new Map('map').setView([17.618955, 121.724668], 17);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       zoomControl: true
