@@ -32,8 +32,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
-                "output": "leaflet/"
+                "input": "./node_modules/leaflet/dist/images/",
+                "output": "./assets/"
               }
             ],
             "styles": [
