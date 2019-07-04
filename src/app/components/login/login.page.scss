@@ -1,4 +1,16 @@
 .login-box {
-    margin-top: 25vh;
+    margin-top: 20vh;
     margin-bottom: 10vh;
+    background: rgba(255, 255, 255, 0.9);
+    
+}
+ion-list {
+    --ion-background-color: transparent; 
+}
+ion-content {
+    --background: none;
+    background-image: url('https://st.depositphotos.com/2557937/2968/v/950/depositphotos_29684867-stock-illustration-join-hand-or-hand-shake.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

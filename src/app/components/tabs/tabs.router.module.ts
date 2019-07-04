@@ -45,14 +45,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/workers-tab',
+        redirectTo: '/main/tabs/workers-tab',
         pathMatch: 'full'
       }
     ]
   },
   {
-    path: '',
-    redirectTo: '/tabs/workers-tab',
+    path: '/main/tabs',
+    redirectTo: '/main/tabs/workers-tab',
     pathMatch: 'full'
   }
 ];
