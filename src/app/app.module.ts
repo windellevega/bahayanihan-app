@@ -7,6 +7,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -18,6 +21,8 @@ import { AppComponent } from './app.component';
     StatusBar,
     SplashScreen,
     Geolocation,
+    AndroidPermissions,
+    LocationAccuracy,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
