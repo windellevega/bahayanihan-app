@@ -6,6 +6,10 @@ import { icon, Marker } from 'leaflet';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+
+import { WorkerinfoModalPage } from '../workerinfo-modal/workerinfo-modal.page';
+import { OverlayEventDetail } from '@ionic/core';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -35,14 +39,24 @@ export class MapTabPage implements OnInit {
   constructor(public geo: Geolocation,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
-    private router: Router) {
+    private router: Router,
+    private modalController: ModalController) {
 
   }
 
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.checkGPSPermission();
+    //this.checkGPSPermission();
+    this.loadLeafletMap();
+  }
+
+  async showWorkerInforModal() {
+    const modal = await this.modalController.create({
+      component: WorkerinfoModalPage,
+      cssClass: 'workerinfo-modal'
+    });
+    await modal.present();
   }
 
   loadLeafletMap() {
@@ -64,6 +78,9 @@ export class MapTabPage implements OnInit {
         .addTo(this.map);
 
         leaflet.marker([this.lat, this.long]).addTo(this.map);
+        leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
+          this.showWorkerInforModal();
+        });
       })
       .catch(err => {
         alert('Your location is not enabled');

@@ -7,19 +7,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { MapTabPage } from './map-tab.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: MapTabPage
-  }
-];
+import { WorkerinfoModalPageModule } from '../workerinfo-modal/workerinfo-modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild([{ path: '', component: MapTabPage }]),
+    WorkerinfoModalPageModule
   ],
   declarations: [MapTabPage]
 })
