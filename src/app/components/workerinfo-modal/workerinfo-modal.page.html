@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>workerinfo-modal</ion-title>
+    <ion-title>Worker Information</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
@@ -9,13 +9,36 @@
 
 <ion-content>
     <ion-card>
-        <img src="https://consideringadoption.com/wp-content/uploads/2016/02/Madison.jpg" />
+        <ion-avatar slot="start" class="worker-image">
+          <img src="./assets/profile.jpg" />
+        </ion-avatar>
         <ion-card-header>
-          <ion-card-subtitle>Destination</ion-card-subtitle>
-          <ion-card-title>Madison, WI</ion-card-title>
+          <ion-card-title text-center>Windelle John Vega</ion-card-title>
+          <ion-card-subtitle text-center><ion-icon name="pin"></ion-icon> Alimannao, Peñablanca, Cagayan</ion-card-subtitle>
+          <rating [rate]="rate"
+            readonly="false" 
+            size="default"
+            (rateChange)="onRateChange($event)">
+          </rating>
         </ion-card-header>
         <ion-card-content>
-          Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+          <h3><strong>Skills:</strong></h3>
+          <p>
+            <ion-chip>
+              <ion-label>Plumbing</ion-label>
+            </ion-chip>
+            <ion-chip>
+              <ion-label>Carpentry</ion-label>
+            </ion-chip>
+            <ion-chip>
+              <ion-label>Laundry</ion-label>
+            </ion-chip>
+          </p>
+          <br>
+          <div class="options">
+            <a primary href="#"><strong>HIRE</strong></a>
+            <a primary href="#"><strong>MESSAGE</strong></a>
+          </div>
         </ion-card-content>
       </ion-card>
 </ion-content>

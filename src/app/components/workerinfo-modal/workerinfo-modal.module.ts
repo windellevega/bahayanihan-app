@@ -6,11 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { WorkerinfoModalPage } from './workerinfo-modal.page';
 
+import { IonicRatingModule } from 'ionic4-rating';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    IonicRatingModule
   ],
   declarations: [WorkerinfoModalPage],
   entryComponents: [WorkerinfoModalPage]

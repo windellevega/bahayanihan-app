@@ -49,6 +49,7 @@ export class MapTabPage implements OnInit {
   ionViewWillEnter() {
     //this.checkGPSPermission();
     this.loadLeafletMap();
+    this.showWorkerInforModal();
   }
 
   async showWorkerInforModal() {
@@ -79,6 +80,12 @@ export class MapTabPage implements OnInit {
 
         leaflet.marker([this.lat, this.long]).addTo(this.map);
         leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
+          this.showWorkerInforModal();
+        });
+        leaflet.marker([17.644121, 121.764212]).addTo(this.map).on('click', () => {
+          this.showWorkerInforModal();
+        });
+        leaflet.marker([15.751979, 121.045666]).addTo(this.map).on('click', () => {
           this.showWorkerInforModal();
         });
       })

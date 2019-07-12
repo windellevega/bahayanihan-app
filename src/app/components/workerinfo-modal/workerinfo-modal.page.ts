@@ -8,6 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class WorkerinfoModalPage implements OnInit {
 
+  rate: any = 5
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
