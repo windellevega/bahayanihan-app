@@ -12,3 +12,24 @@
 .workerinfo-modal .modal-wrapper {
     height: 70%!important;
 }
+
+ion-header { 
+    --ion-toolbar-background: #c55526;
+}
+
+ion-header * { 
+    color: #ffffff;
+}
+
+ion-tab-button {
+    color: #c55526;
+}
+
+:root {
+    ion-tab-button.tab-selected {
+      ion-icon, ion-label {
+        color: #3354b8 !important;
+        --ion-color-base: #3354b8 !important;
+      }
+    }
+}

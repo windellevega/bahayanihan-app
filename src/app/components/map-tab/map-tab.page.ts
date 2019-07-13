@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { WorkerinfoModalPage } from '../workerinfo-modal/workerinfo-modal.page';
-import { OverlayEventDetail } from '@ionic/core';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -47,9 +46,9 @@ export class MapTabPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    //this.checkGPSPermission();
-    this.loadLeafletMap();
-    this.showWorkerInforModal();
+    this.checkGPSPermission();
+    //this.loadLeafletMap();
+    //this.showWorkerInforModal();
   }
 
   async showWorkerInforModal() {
