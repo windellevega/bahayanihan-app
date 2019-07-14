@@ -46,9 +46,9 @@ export class MapTabPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.checkGPSPermission();
-    //this.loadLeafletMap();
-    //this.showWorkerInforModal();
+    //this.checkGPSPermission();
+    this.loadLeafletMap();
+    this.showWorkerInforModal();
   }
 
   async showWorkerInforModal() {
