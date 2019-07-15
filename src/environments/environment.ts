@@ -7,7 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:8000/',
   oauth: {
     clientId: '2',
-    clientSecret: 'V7pgLGENwKSywCIrVU949YmQtixhm8kNrEkAFN0L'
+    clientSecret: 'Aknq1gNltlpCDCJ4RSCVWoXwJKPUayNCZxSaUCtu'
   }
 };
 

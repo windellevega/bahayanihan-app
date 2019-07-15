@@ -13,9 +13,9 @@
       </ion-avatar>
       <div id="change-photo" text-center><a><ion-icon name="create"></ion-icon>Change Photo</a></div>
       <ion-card-header>
-        <ion-card-title text-center id="profile-name">Windelle John Vega</ion-card-title>
-        <ion-card-subtitle text-center><ion-icon name="pin"></ion-icon> Alimannao, Peñablanca, Cagayan</ion-card-subtitle>
-        <ion-card-subtitle text-center><ion-icon name="call"></ion-icon> 0917 123 4567</ion-card-subtitle>
+        <ion-card-title text-center id="profile-name">{{ userProfile?.firstname }} {{ userProfile?.lastname }}</ion-card-title>
+        <ion-card-subtitle text-center><ion-icon name="pin"></ion-icon> {{ userProfile?.address }}</ion-card-subtitle>
+        <ion-card-subtitle text-center><ion-icon name="call"></ion-icon> {{ userProfile?.mobile_number }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         
