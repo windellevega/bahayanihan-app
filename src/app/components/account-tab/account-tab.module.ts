@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AccountTabPage } from './account-tab.page';
+import { UserAuthService } from 'src/app/services/auth/user-auth.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AccountTabPage } from './account-tab.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: AccountTabPage }])
   ],
+  providers: [UserAuthService],
   declarations: [AccountTabPage]
 })
 export class AccountTabPageModule {}

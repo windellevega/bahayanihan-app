@@ -33,3 +33,8 @@ ion-tab-button {
       }
     }
 }
+
+.item-has-focus {
+    --highlight-color-valid: #3354b8;
+    --highlight-color-focused: #3354b8;
+}

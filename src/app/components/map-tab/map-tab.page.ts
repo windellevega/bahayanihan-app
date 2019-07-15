@@ -35,7 +35,8 @@ export class MapTabPage implements OnInit {
   lat: any;
   long: any;
 
-  constructor(public geo: Geolocation,
+  constructor(
+    public geo: Geolocation,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
     private router: Router,

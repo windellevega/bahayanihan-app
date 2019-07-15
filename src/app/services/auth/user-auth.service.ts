@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { tap, catchError, mapTo } from 'rxjs/operators';
 import { of } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,47 @@ export class UserAuthService {
         tap(res => {
           localStorage.setItem('access_token', res.access_token);
           localStorage.setItem('refresh_token', res.refresh_token);
-          console.log(localStorage.getItem('access_token'));
         }),
         catchError(error => {
-          console.log(error);
           return of(false);
         })
       );
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  }
+
+  getToken(): string {
+    return localStorage.getItem('access_token');
+  }
+
+  getTokenExpirationDate(token: string): Date {
+    const decoded = jwt_decode(token);
+
+    if (decoded.exp === undefined) {
+      return null;
+    }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if (!token) {
+      token = this.getToken();
+    }
+
+    if (!token) {
+      return true;
+    }
+
+    const date = this.getTokenExpirationDate(token);
+    if (date === undefined) {
+      return false;
+    }
+    return !(date.valueOf() > new Date().valueOf());
   }
 }
