@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8000/',
+  apiUrl: 'https://evening-mesa-93885.herokuapp.com/',
   oauth: {
     clientId: '2',
-    clientSecret: 'Aknq1gNltlpCDCJ4RSCVWoXwJKPUayNCZxSaUCtu'
+    clientSecret: 'kwuNG08lA3y9zhQFD8rgytWvL7GJyij1DASJ25FR'
   }
 };
 
