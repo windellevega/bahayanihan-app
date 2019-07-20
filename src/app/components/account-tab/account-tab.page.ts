@@ -4,6 +4,7 @@ import { UserService } from '../../services/user/user.service';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/user.interface';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AccountTabPage implements OnInit{
   constructor(
     private userAuthService: UserAuthService,
     private userService: UserService,
-    private router: Router) {}
+    private router: Router,
+    private loadingController: LoadingController) {}
 
   ngOnInit() {
     this.getOwnProfile();
@@ -28,11 +30,29 @@ export class AccountTabPage implements OnInit{
     this.router.navigate(['/']);
   }
 
-  getOwnProfile() {
+  async getOwnProfile() {
+    await this.showUserProfileLoading();
+
     this.userService.getOwnProfile()
       .subscribe(data => {
         this.userProfile = data;
         this.userProfile.mobile_number = this.userService.formatMobileNumber(data.mobile_number);
+        
+        this.hideUserProfileLoading();
       });
+  }
+
+  async showUserProfileLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Loading profile...',
+      spinner: 'lines',
+      translucent: true
+    });
+    await loading.present();
+  }
+
+  async hideUserProfileLoading() {
+    const loading = await this.loadingController.getTop();
+    loading.dismiss();
   }
 }

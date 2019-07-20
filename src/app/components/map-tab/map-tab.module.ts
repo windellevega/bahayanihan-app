@@ -9,11 +9,6 @@ import { MapTabPage } from './map-tab.page';
 
 import { WorkerinfoModalPageModule } from '../workerinfo-modal/workerinfo-modal.module';
 
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -22,11 +17,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     RouterModule.forChild([{ path: '', component: MapTabPage }]),
     WorkerinfoModalPageModule
   ],
-  providers: [
-    Geolocation,
-    AndroidPermissions,
-    LocationAccuracy
-  ],
+  providers: [],
   declarations: [MapTabPage]
 })
 export class MapTabPageModule {}

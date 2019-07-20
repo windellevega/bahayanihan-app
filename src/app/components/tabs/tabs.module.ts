@@ -7,6 +7,8 @@ import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
 
+import { UserService } from 'src/app/services/user/user.service';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,6 +16,7 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule
   ],
+  providers: [UserService],
   declarations: [TabsPage]
 })
 export class TabsPageModule {}

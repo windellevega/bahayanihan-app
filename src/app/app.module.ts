@@ -11,6 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './services/auth/auth.guard';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,8 +24,13 @@ import { AuthGuard } from './services/auth/auth.guard';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule],
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule],
   providers: [
+    Geolocation,
+    AndroidPermissions,
+    LocationAccuracy,
     StatusBar,
     SplashScreen,
     AuthGuard,

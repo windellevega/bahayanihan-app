@@ -5,6 +5,7 @@ export interface IUser {
     lastname: string;
     email_address: string;
     username: string;
+    password: string;
     address: string;
     current_long: string;
     current_lat: string;
