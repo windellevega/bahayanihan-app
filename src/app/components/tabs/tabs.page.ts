@@ -27,5 +27,5 @@ export class TabsPage implements OnInit{
     .catch(err => {
       alert('Your location is not enabled');
     });
-}
+  }
 }
