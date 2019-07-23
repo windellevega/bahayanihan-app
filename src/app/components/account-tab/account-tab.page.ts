@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import { UserService } from '../../services/user/user.service';
 import {Router} from '@angular/router';
-import { Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { LoadingController } from '@ionic/angular';
 
@@ -33,7 +32,7 @@ export class AccountTabPage implements OnInit{
   async getOwnProfile() {
     await this.showUserProfileLoading();
 
-    this.userService.getOwnProfile()
+    await this.userService.getOwnProfile()
       .subscribe(data => {
         this.userProfile = data;
         this.userProfile.mobile_number = this.userService.formatMobileNumber(data.mobile_number);

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-workerinfo-modal',
@@ -8,10 +9,18 @@ import { ModalController } from '@ionic/angular';
 })
 export class WorkerinfoModalPage implements OnInit {
 
-  rate: any = 5
-  constructor(private modalController: ModalController) { }
+  @Input() workerInfo: IUser;
+
+  userInfo: IUser;
+  rate: any = 5;
+
+  constructor(
+    private modalController: ModalController) { 
+
+    }
 
   ngOnInit() {
+    
   }
 
   async dismissModal() {

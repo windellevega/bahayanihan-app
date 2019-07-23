@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class UserService{
     return [mobileNo.slice(0, 4), ' ' , mobileNo.slice(4, 7), ' ', mobileNo.slice(7, 11)].join('');
   }
 
-  registerUser(firstName, middleName, lastName, emailAdd, username, password, mobileNo, address) {
+  registerUser(firstName, middleName, lastName, emailAdd, username, password, mobileNo, address): Observable<any> {
     return this.httpClient.post<any>(environment.apiUrl + 'api/user/register',
       {
         firstname: firstName,
@@ -43,5 +44,15 @@ export class UserService{
         mobile_number: mobileNo
 
       }).pipe();
+  }
+
+  getWorkers(): Observable<IUser[]> {
+    return this.httpClient.get<IUser[]>(environment.apiUrl + 'api/users/1')
+      .pipe()
+  }
+
+  getUserInformation(id): Observable<IUser> {
+    return this.httpClient.get<IUser>(environment.apiUrl + 'api/user/' + id)
+      .pipe();
   }
 }

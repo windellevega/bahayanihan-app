@@ -6,19 +6,20 @@ import { icon, Marker } from 'leaflet';
 import { ModalController } from '@ionic/angular';
 
 import { WorkerinfoModalPage } from '../workerinfo-modal/workerinfo-modal.page';
+import { UserService } from 'src/app/services/user/user.service';
+import { IUser } from 'src/app/interfaces/user.interface';
 
-const iconRetinaUrl = 'assets/marker-icon-2x.png';
-const iconUrl = 'assets/marker-icon.png';
+const iconRetinaUrl = 'assets/marker_icons/marker-icon-2x.png';
+const iconUrl = 'assets/marker_icons/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
+  iconSize: [45, 45],
+  iconAnchor: [12, 45],
+  shadowSize: [50, 50],
+  shadowAnchor: [5, 50]
 });
 Marker.prototype.options.icon = iconDefault;
 
@@ -34,7 +35,8 @@ export class MapTabPage implements OnInit {
 
   constructor(
     public geo: Geolocation,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private userService: UserService) {
 
   }
 
@@ -42,13 +44,17 @@ export class MapTabPage implements OnInit {
 
   ionViewWillEnter() {
     this.loadLeafletMap();
-    this.showWorkerInfoModal();
+    //this.showWorkerInfoModal();
+    //this.getWorkers();
   }
 
-  async showWorkerInfoModal() {
+  async showWorkerInfoModal(workerInfo: IUser) {
     const modal = await this.modalController.create({
       component: WorkerinfoModalPage,
-      cssClass: 'workerinfo-modal'
+      cssClass: 'workerinfo-modal',
+      componentProps: {
+        workerInfo: workerInfo
+      }
     });
     await modal.present();
   }
@@ -72,7 +78,8 @@ export class MapTabPage implements OnInit {
         .addTo(this.map);
 
         leaflet.marker([this.lat, this.long]).addTo(this.map);
-        leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
+        this.getWorkers();
+        /*leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
           this.showWorkerInfoModal();
         });
         leaflet.marker([17.644121, 121.764212]).addTo(this.map).on('click', () => {
@@ -80,10 +87,23 @@ export class MapTabPage implements OnInit {
         });
         leaflet.marker([15.751979, 121.045666]).addTo(this.map).on('click', () => {
           this.showWorkerInfoModal();
-        });
+        });*/
       })
       .catch(err => {
         alert('Your location is not enabled');
+      });
+  }
+
+  async getWorkers() {
+    await this.userService.getWorkers()
+      .subscribe(workers => {
+        for(let worker of workers) {
+          //alert(worker.firstname);
+          leaflet.marker([worker.current_lat, worker.current_long]).addTo(this.map).on('click', () => {
+            this.showWorkerInfoModal(worker);
+            //alert('clicked');
+          });
+        }
       });
   }
 }
