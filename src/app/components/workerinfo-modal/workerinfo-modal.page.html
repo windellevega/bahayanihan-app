@@ -25,8 +25,8 @@
         <ion-card-content>
           <h3><strong>Skills:</strong></h3>
           <p>
-            <ion-chip *ngFor="let skill of workerInfo?.user_skills">
-              <ion-label>{{ skill.skills.skill_name }}</ion-label>
+            <ion-chip *ngFor="let skill of workerInfo?.skills">
+              <ion-label>{{ skill.skill_name }}</ion-label>
             </ion-chip>
           </p>
           <br>

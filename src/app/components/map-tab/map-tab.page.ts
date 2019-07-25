@@ -98,6 +98,7 @@ export class MapTabPage implements OnInit {
     await this.userService.getWorkers()
       .subscribe(workers => {
         for(let worker of workers) {
+          console.log(workers);
           //alert(worker.firstname);
           worker.mobile_number = this.userService.formatMobileNumber(worker.mobile_number);
           leaflet.marker([worker.current_lat, worker.current_long]).addTo(this.map).on('click', () => {
