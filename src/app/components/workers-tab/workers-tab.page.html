@@ -9,28 +9,10 @@
 
 <ion-content>
     
-    <ion-card class="welcome-card" (click)="loadMap()">
-      <ion-img src="/assets/plumbing.jpg"></ion-img>
+    <ion-card class="welcome-card" (click)="loadMap(skill.id)" *ngFor="let skill of skills">
+      <img [src]="skill.picture_url"/>
       <ion-card-header>
-        <ion-card-title class="skill-name">Plumbing</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-    <ion-card class="welcome-card" (click)="loadMap()">
-      <ion-img src="/assets/carpentry.jpg"></ion-img>
-      <ion-card-header>
-        <ion-card-title class="skill-name">Carpentry</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-    <ion-card class="welcome-card" (click)="loadMap()">
-      <ion-img src="/assets/painting.jpg"></ion-img>
-      <ion-card-header>
-        <ion-card-title class="skill-name">Painting</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-    <ion-card class="welcome-card" (click)="loadMap()">
-      <ion-img src="/assets/machinery.jpg"></ion-img>
-      <ion-card-header>
-        <ion-card-title class="skill-name">Machinery</ion-card-title>
+        <ion-card-title class="skill-name">{{ skill.skill_name }}</ion-card-title>
       </ion-card-header>
     </ion-card>
 </ion-content>

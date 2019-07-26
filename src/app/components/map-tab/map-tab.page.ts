@@ -8,6 +8,7 @@ import { ModalController } from '@ionic/angular';
 import { WorkerinfoModalPage } from '../workerinfo-modal/workerinfo-modal.page';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/interfaces/user.interface';
+import { ActivatedRoute } from '@angular/router';
 
 const iconRetinaUrl = 'assets/marker_icons/marker-icon-2x.png';
 const iconUrl = 'assets/marker_icons/marker-icon.png';
@@ -32,20 +33,28 @@ export class MapTabPage implements OnInit {
   map: any;
   lat: any;
   long: any;
+  skillId: number = 0;
 
   constructor(
     public geo: Geolocation,
     private modalController: ModalController,
-    private userService: UserService) {
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute) {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+   
+  }
 
   ionViewWillEnter() {
+    this.skillId = Number(this.activatedRoute.snapshot.queryParamMap.get('skillId'));
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+      this.skillId = Number(queryParams.get('skillId'));
+    });
     this.loadLeafletMap();
     //this.showWorkerInfoModal();
-    //this.getWorkers();
+    this.getWorkers(this.skillId);
   }
 
   async showWorkerInfoModal(workerInfo: IUser) {
@@ -78,7 +87,7 @@ export class MapTabPage implements OnInit {
         .addTo(this.map);
 
         leaflet.marker([this.lat, this.long]).addTo(this.map);
-        this.getWorkers();
+        //this.getWorkers();
         /*leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
           this.showWorkerInfoModal();
         });
@@ -94,8 +103,8 @@ export class MapTabPage implements OnInit {
       });
   }
 
-  async getWorkers() {
-    await this.userService.getWorkers()
+  async getWorkers(skillId) {
+    await this.userService.getWorkers(skillId)
       .subscribe(workers => {
         for(let worker of workers) {
           console.log(workers);

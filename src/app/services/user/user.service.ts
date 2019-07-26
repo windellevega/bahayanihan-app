@@ -2,7 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IUser } from 'src/app/interfaces/user.interface';
-import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -46,8 +45,15 @@ export class UserService{
       }).pipe();
   }
 
-  getWorkers(): Observable<IUser[]> {
-    return this.httpClient.get<IUser[]>(environment.apiUrl + 'api/users/1')
+  getWorkers(skillId): Observable<IUser[]> {
+    var route;
+    if(skillId == 0) {
+      route = environment.apiUrl + 'api/users/1';
+    }
+    else {
+      route = environment.apiUrl + 'api/users/1/' + skillId; 
+    }
+    return this.httpClient.get<IUser[]>(route)
       .pipe()
   }
 

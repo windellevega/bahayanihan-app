@@ -7,12 +7,22 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
+      
       {
         path: 'workers-tab',
         children: [
           {
             path: '',
             loadChildren: '../workers-tab/workers-tab.module#WorkersTabPageModule'
+          }
+        ]
+      },
+      {
+        path: 'map-tab/:skillId',
+        children: [
+          {
+            path: '',
+            loadChildren: '../map-tab/map-tab.module#MapTabPageModule'
           }
         ]
       },
