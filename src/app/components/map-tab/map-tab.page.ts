@@ -54,7 +54,6 @@ export class MapTabPage implements OnInit {
     });
     this.loadLeafletMap();
     //this.showWorkerInfoModal();
-    this.getWorkers(this.skillId);
   }
 
   async showWorkerInfoModal(workerInfo: IUser) {
@@ -87,7 +86,7 @@ export class MapTabPage implements OnInit {
         .addTo(this.map);
 
         leaflet.marker([this.lat, this.long]).addTo(this.map);
-        //this.getWorkers();
+        this.getWorkers(this.skillId);
         /*leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
           this.showWorkerInfoModal();
         });
