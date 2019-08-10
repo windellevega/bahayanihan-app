@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkersTabPage } from './workers-tab.page';
 import { SkillService } from 'src/app/services/skill/skill.service';
 
@@ -11,6 +11,7 @@ import { SkillService } from 'src/app/services/skill/skill.service';
     IonicModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: WorkersTabPage }])
   ],
   providers: [SkillService],

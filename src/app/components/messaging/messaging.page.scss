@@ -1,0 +1,62 @@
+.recepient-name {
+    color: rgb(37, 37, 37) !important;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.message {
+    padding: 10px !important;
+    transition: all 250ms ease-in-out !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+    white-space: pre-wrap;
+}
+
+.my-message {
+	background: #3354b8;
+    color: rgb(255, 255, 255) !important;
+}
+
+.message-content {
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
+}
+
+.other-message {
+    background: #dcdcdc !important;
+    color: rgb(37, 37, 37) !important;
+}
+
+.user-image {
+    max-height: 100%;
+    max-width: 100%;
+    height: 40px;
+    width: 40px;
+    margin-top: 145%;
+}
+
+.time {
+    color: #afafaf;
+    float: right;
+    font-size: small;
+}
+
+.message-row {
+    background-color: #fff;
+}
+
+.send-button {
+    color: #3354b8 !important;
+    padding: 0 5px !important;
+    margin-top: 10px;
+}
+
+.message-input {
+    margin-top: 0;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    background: rgb(241, 241, 241);
+    resize: none;
+    padding: 10px;
+}

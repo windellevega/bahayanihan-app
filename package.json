@@ -34,7 +34,10 @@
     "core-js": "^2.5.4",
     "ionic4-rating": "^1.0.9",
     "jwt-decode": "^2.2.0",
+    "laravel-echo": "^1.5.4",
+    "laravel-echo-ionic": "^1.0.2",
     "leaflet": "^1.5.1",
+    "pusher-js": "^5.0.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.29"

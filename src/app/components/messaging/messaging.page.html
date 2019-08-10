@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none" class="message-header">
+      <ion-avatar slot="start">
+        <img src="https://picsum.photos/200">
+      </ion-avatar>
+      <ion-label>
+        <strong><h2 class="recepient-name">Someone</h2></strong>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="4" size="8" class="message my-message">
+        <strong class="user-name">Windelle Vega</strong><br>
+        <p class="message-content">Hello</p>
+        <span class="time" text-right><br>
+          08-11-2019
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-avatar class="user-image">
+            <img src="https://picsum.photos/200">
+          </ion-avatar>
+      </ion-col>
+      <ion-col size="7" class="message other-message">
+        <strong class="user-name">Someone</strong><br>
+        <p class="message-content">Hi! How are you today. Hope you're doing fine.</p>
+        <span class="time" text-right><br>
+          08-11-2019
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="message-row">
+      <ion-col class="message-col" size="9">
+        <textarea autosize maxRows="3" [(ngModel)]="newMessage" class="message-input" placeholder="Message"></textarea>
+      </ion-col>
+      <ion-col class="send-col" size="3">
+        <ion-button fill="clear" expand="block" strong [disabled]="newMessage === ''" class="send-button">
+          Send
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

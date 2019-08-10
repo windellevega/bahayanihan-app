@@ -15,7 +15,8 @@ export class WorkersTabPage implements OnInit{
   constructor(
     private router: Router,
     private skillService: SkillService,
-    private loadingController: LoadingController) {}
+    private loadingController: LoadingController) {
+    }
 
   ngOnInit() {
     this.loadSkills();
