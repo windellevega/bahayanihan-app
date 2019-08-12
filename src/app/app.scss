@@ -17,13 +17,21 @@ ion-header {
     --ion-toolbar-background: #c55526;
 }
 
-ion-header * { 
+.back-button {
+    color: #ffffff !important;
+}
+
+ion-title { 
     color: #ffffff;
 }
 
 ion-tab-button {
     color: #c55526;
 }
+
+/*.sc-ion-back-button-md, .sc-ion-back-button-ios {
+    color: #ffffff;
+}*/
 
 :root {
     ion-tab-button.tab-selected {

@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', loadChildren: './components/login/login.module#LoginPageModule' },
   { path: 'login', loadChildren: './components/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },  { path: 'messaging', loadChildren: './components/messaging/messaging.module#MessagingPageModule' },
+  { path: 'message-logs', loadChildren: './components/message-logs/message-logs.module#MessageLogsPageModule' },
 
 
 ];
