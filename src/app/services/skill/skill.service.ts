@@ -12,7 +12,7 @@ export class SkillService {
   constructor(private httpClient: HttpClient) { }
 
   getSkills(): Observable<ISkill[]> {
-    return this.httpClient.get<ISkill[]>(environment.apiUrl + 'api/skills')
+    return this.httpClient.get<ISkill[]>(environment.apiUrl + '/api/skills')
       .pipe()
   }
 }

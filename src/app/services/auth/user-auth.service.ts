@@ -13,7 +13,7 @@ export class UserAuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(usernameOrEmail: string, password: string) {
-    return this.httpClient.post<any>(environment.apiUrl + 'oauth/token',
+    return this.httpClient.post<any>(environment.apiUrl + '/oauth/token',
       {
         grant_type: 'password',
         client_id: environment.oauth.clientId,

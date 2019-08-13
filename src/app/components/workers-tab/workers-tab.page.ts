@@ -33,7 +33,7 @@ export class WorkersTabPage implements OnInit{
       .subscribe(data => {
         this.skills = data;
         this.hideSkillsLoading();
-      })
+      });
   }
 
   async showSkillsLoading() {

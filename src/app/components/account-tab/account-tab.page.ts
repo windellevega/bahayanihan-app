@@ -36,7 +36,7 @@ export class AccountTabPage implements OnInit{
       .subscribe(data => {
         this.userProfile = data;
         this.userProfile.mobile_number = this.userService.formatMobileNumber(data.mobile_number);
-        
+
         this.hideUserProfileLoading();
       });
   }

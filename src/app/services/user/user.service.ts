@@ -12,12 +12,12 @@ export class UserService{
   constructor(private httpClient: HttpClient) { }
 
   getOwnProfile() {
-    return this.httpClient.get<IUser>(environment.apiUrl + 'api/profile')
+    return this.httpClient.get<IUser>(environment.apiUrl + '/api/profile')
       .pipe();
   }
 
   updateUserLocation(latitude, longitude) {
-    return this.httpClient.put<any>(environment.apiUrl + 'api/user-location',
+    return this.httpClient.put<any>(environment.apiUrl + '/api/user-location',
     {
       current_lat: latitude,
       current_long: longitude
@@ -29,7 +29,7 @@ export class UserService{
   }
 
   registerUser(firstName, middleName, lastName, emailAdd, username, password, mobileNo, address): Observable<any> {
-    return this.httpClient.post<any>(environment.apiUrl + 'api/user/register',
+    return this.httpClient.post<any>(environment.apiUrl + '/api/user/register',
       {
         firstname: firstName,
         middlename: middleName,
@@ -46,19 +46,19 @@ export class UserService{
   }
 
   getWorkers(skillId): Observable<IUser[]> {
-    var route;
-    if(skillId == 0) {
-      route = environment.apiUrl + 'api/users/1';
-    }
+    let route;
+    if (skillId === 0) {
+      route = environment.apiUrl + '/api/users/1';
+    } 
     else {
-      route = environment.apiUrl + 'api/users/1/' + skillId; 
+      route = environment.apiUrl + '/api/users/1/' + skillId;
     }
     return this.httpClient.get<IUser[]>(route)
-      .pipe()
+      .pipe();
   }
 
   getUserInformation(id): Observable<IUser> {
-    return this.httpClient.get<IUser>(environment.apiUrl + 'api/user/' + id)
+    return this.httpClient.get<IUser>(environment.apiUrl + '/api/user/' + id)
       .pipe();
   }
 }

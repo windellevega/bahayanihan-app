@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MessagingPage } from './messaging.page';
+import { MessagingService } from 'src/app/services/messaging/messaging.service';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
+  providers: [MessagingService],
   declarations: [MessagingPage]
 })
 export class MessagingPageModule {}
