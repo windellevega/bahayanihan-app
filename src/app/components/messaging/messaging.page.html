@@ -18,7 +18,7 @@
         <strong class="user-name">You</strong><br>
         <p class="message-content">{{ message.message }}</p>
         <span class="time" text-right><br>
-          {{ message.created_at }}
+          {{ message.created_at | date: 'MMM d, yyy h:mm aaa' }}
         </span>
       </ion-col>
 
@@ -28,10 +28,10 @@
           </ion-avatar>
       </ion-col>
       <ion-col size="7" class="message other-message" *ngIf="userId != message.from_user_id">
-        <strong class="user-name">{{ message.user.firstname }} {{ message.user.lastname }}</strong><br>
+        <strong class="user-name">{{ message.user.firstname }}</strong><br>
         <p class="message-content">{{ message.message }}</p>
         <span class="time" text-right><br>
-          {{ message.created_at | date: 'medium'}}
+          {{ message.created_at | date: 'MMM d, yyy h:mm aaa' }}
         </span>
       </ion-col>
     </ion-row>

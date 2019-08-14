@@ -3,7 +3,7 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { IMessage } from 'src/app/interfaces/message.interface';
 
 @Injectable({
@@ -11,6 +11,7 @@ import { IMessage } from 'src/app/interfaces/message.interface';
 })
 export class MessagingService {
   echo: any;
+  message$ = new BehaviorSubject<any>('');
 
   constructor(
     private httpClient: HttpClient
@@ -31,12 +32,13 @@ export class MessagingService {
     console.log(this.echo);
   }
 
-  listenNewMessage(id) {
+  listenNewMessage(id): Observable<any> {
     console.log('Listening to conversation.' + id + ' channel...');
     this.echo.private('conversation.' + id)
       .listen('NewMessage', (message) => {
-        console.log(message);
+        this.message$.next(message);
       });
+    return this.message$.asObservable();
   }
 
   getConversations(): Observable<any> {
@@ -47,5 +49,12 @@ export class MessagingService {
   getMessages(conversationId): Observable<any> {
     return this.httpClient.get<any>(environment.apiUrl + '/api/conversation/' + conversationId)
       .pipe();
+  }
+
+  sendMessageToConversation(conversationId, message): Observable<any> {
+    return this.httpClient.post<any>(environment.apiUrl + '/api/message', {
+      conversation_id: conversationId,
+      message: message
+    }).pipe();
   }
 }

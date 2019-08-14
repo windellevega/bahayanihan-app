@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
 import { ActivatedRoute } from '@angular/router';
 import { IMessage } from 'src/app/interfaces/message.interface';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-messaging',
@@ -23,12 +23,14 @@ export class MessagingPage implements OnInit {
     private loadingController: LoadingController
   ) { }
 
+  @ViewChild(IonContent) content: IonContent;
+
   ngOnInit() {
     this.conversationId = Number(this.activatedRoute.snapshot.queryParamMap.get('conversationId'));
     this.userId = Number(this.activatedRoute.snapshot.queryParamMap.get('userId'));
     this.otherUserFirstname = this.activatedRoute.snapshot.queryParamMap.get('otherUserFirstname');
     this.otherUserPic = this.activatedRoute.snapshot.queryParamMap.get('otherUserPic');
-    this.messagingService.listenNewMessage(this.conversationId);
+
     this.getMessages();
     console.log(this.conversationId, this.userId);
   }
@@ -41,6 +43,25 @@ export class MessagingPage implements OnInit {
         this.messages = data.messages;
         console.log(this.messages);
         this.hideMessagesLoading();
+        this.listenToMessagingChannel();
+        setTimeout(() => {
+          this.content.scrollToBottom(200);
+        });
+      });
+  }
+
+  listenToMessagingChannel() {
+    this.messagingService.listenNewMessage(this.conversationId)
+      .subscribe(message => {
+          if (message !== '') {
+            console.log(message);
+            if (message.from_user_id != this.userId) {
+              this.messages.push(message);
+            }
+            setTimeout(() => {
+              this.content.scrollToBottom(200);
+            });
+          }
       });
   }
 
@@ -59,6 +80,7 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
+    this.messagingService.sendMessageToConversation(this.conversationId, this.newMessage).subscribe();
     this.messages.push({
       conversation_id: this.conversationId,
       from_user_id: this.userId,
@@ -73,5 +95,10 @@ export class MessagingPage implements OnInit {
       }
     });
     this.newMessage = '';
+
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    });
   }
+
 }
