@@ -27,4 +27,8 @@ export class WorkerinfoModalPage implements OnInit {
     const modal = await this.modalController.getTop();
     await modal.dismiss();
   }
+
+  onRateChange($event) {
+    
+  }
 }

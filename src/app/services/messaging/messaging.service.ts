@@ -38,6 +38,7 @@ export class MessagingService {
       .listen('NewMessage', (message) => {
         this.message$.next(message);
       });
+    console.log(this.echo);
     return this.message$.asObservable();
   }
 

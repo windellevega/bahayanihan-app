@@ -12,4 +12,5 @@ export interface IUser {
     is_worker: boolean;
     profile_picture_url: string;
     mobile_number: string;
+    skills: any[];
 }
