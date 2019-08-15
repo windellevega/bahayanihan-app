@@ -12,9 +12,14 @@
     <ion-avatar slot="start">
       <img [src]="conversation.users[0].profile_picture_url">
     </ion-avatar>
-    <ion-label>
+    <ion-label *ngIf="conversation.unread_messages_count > 0">
+      <h2><strong>{{ conversation.users[0].firstname }} {{ conversation.users[0].lastname }}</strong></h2>
+      <p><strong>{{ conversation.latest_message.message }}</strong></p>
+    </ion-label>
+    <ion-label *ngIf="conversation.unread_messages_count == 0">
       <h2>{{ conversation.users[0].firstname }} {{ conversation.users[0].lastname }}</h2>
       <p>{{ conversation.latest_message.message }}</p>
     </ion-label>
+    <ion-badge color="danger" slot="end" *ngIf="conversation.unread_messages_count > 0">{{ conversation.unread_messages_count }}</ion-badge>
   </ion-item>
 </ion-content>

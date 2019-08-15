@@ -27,6 +27,7 @@ export class MessageLogsPage implements OnInit {
 
     await this.messagingService.getConversations()
       .subscribe(data => {
+        console.log(data);
         this.userId = data.id;
         this.conversations = data.conversations;
         this.hideConversationsLoading();
