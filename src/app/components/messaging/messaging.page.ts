@@ -23,7 +23,7 @@ export class MessagingPage implements OnInit {
     private loadingController: LoadingController
   ) { }
 
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, { static: true }) content: IonContent;
 
   ngOnInit() {
     this.conversationId = Number(this.activatedRoute.snapshot.queryParamMap.get('conversationId'));
