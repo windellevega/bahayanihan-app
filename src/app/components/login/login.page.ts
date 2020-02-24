@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController) { }
 
   ngOnInit() {
-    this.checkGPSPermission();
+    //this.checkGPSPermission();
   }
 
   async login() {

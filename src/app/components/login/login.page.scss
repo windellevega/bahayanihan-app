@@ -1,18 +1,18 @@
 .login-box {
-    margin-top: 20vh;
+    margin-top: 5vh;
     margin-bottom: 10vh;
-    background: rgba(255, 255, 255, 0.9);
-    
+    background: rgba(255, 255, 255, 0.75);
+    padding-bottom: 50px;
 }
 ion-list {
     --ion-background-color: transparent; 
 }
 ion-content {
     --background: none;
-    background-image: url('https://st.depositphotos.com/2557937/2968/v/950/depositphotos_29684867-stock-illustration-join-hand-or-hand-shake.jpg');
-    background-position: top;
+    background-image: url('https://image.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg');
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto;
 }
 
 #login-button {
@@ -25,4 +25,10 @@ ion-content {
 
 #login-title {
     color: #2a2a2a;
+}
+
+.icon-header {
+    width: 120px;
+    height: 120px;
+    margin: 10vh auto 0;
 }
