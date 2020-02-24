@@ -4,12 +4,12 @@
       Search Workers
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
     
-    <ion-card class="welcome-card" (click)="loadMap(skill.id)" *ngFor="let skill of skills">
+    <ion-card class="welcome-card" (click)="loadMap(skill.id)" *ngFor="let skill of skillsFiltered">
       <img [src]="skill.picture_url"/>
       <ion-card-header>
         <ion-card-title class="skill-name">{{ skill.skill_name }}</ion-card-title>

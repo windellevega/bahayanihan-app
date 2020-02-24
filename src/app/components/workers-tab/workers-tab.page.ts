@@ -12,6 +12,7 @@ import { LoadingController } from '@ionic/angular';
 export class WorkersTabPage implements OnInit{
 
   skills: ISkill[];
+  skillsFiltered: ISkill[];
   constructor(
     private router: Router,
     private skillService: SkillService,
@@ -32,8 +33,19 @@ export class WorkersTabPage implements OnInit{
     await this.skillService.getSkills()
       .subscribe(data => {
         this.skills = data;
+        this.skillsFiltered = data;
         this.hideSkillsLoading();
       });
+  }
+
+  filterList(event) {
+    var value = event.target.value;
+    this.skillsFiltered = this.skills;
+    if(value && value.trim() != '') {
+      this.skillsFiltered = this.skills.filter((skill) => {
+        return (skill.skill_name.toLowerCase().indexOf(value.trim().toLowerCase()) > -1);
+      });
+    }
   }
 
   async showSkillsLoading() {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user/user.service';
+import { UserService } from '../../services/user/user.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { IUser } from '../interfaces/user.interface';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({

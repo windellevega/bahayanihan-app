@@ -8,13 +8,13 @@
 
 <ion-content>
   <ion-card>
-      <ion-avatar slot="start" class="worker-image">
+      <ion-avatar class="worker-image">
         <img src="{{ userProfile?.profile_picture_url }}" />
       </ion-avatar>
       <div id="change-photo" class="ion-text-center"><a><ion-icon name="create"></ion-icon>Change Photo</a></div>
       <ion-card-header>
         <ion-card-title  class="ion-text-center" id="profile-name">{{ userProfile?.firstname }} {{ userProfile?.lastname }}</ion-card-title>
-        <ion-card-subtitle class="ion-text-center"><ion-icon name="pin"></ion-icon> {{ userProfile?.address }}</ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-center"><ion-icon name="location"></ion-icon> {{ userProfile?.address }}</ion-card-subtitle>
         <ion-card-subtitle class="ion-text-center"><ion-icon name="call"></ion-icon> {{ userProfile?.mobile_number }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
@@ -27,7 +27,7 @@
       </ion-list-header>
       <ion-item lines="inset"  routerLink="/message-logs">
         <ion-label>
-          <p><ion-icon name="chatboxes"></ion-icon> Message Logs</p>
+          <p><ion-icon name="chatbubbles"></ion-icon> Message Logs</p>
         </ion-label>
         <ion-badge color="danger" slot="end">1</ion-badge>
       </ion-item>
@@ -38,7 +38,7 @@
       </ion-item>
       <ion-item lines="inset">
         <ion-label>
-          <p><ion-icon name="lock"></ion-icon> Change Password</p>
+          <p><ion-icon name="key"></ion-icon> Change Password</p>
         </ion-label>
       </ion-item>
       <ion-item lines="inset" (click)="logout()">

@@ -9,12 +9,12 @@
 
 <ion-content>
     <ion-card>
-        <ion-avatar slot="start" class="worker-image">
+        <ion-avatar class="worker-image">
           <img src="{{ workerInfo?.profile_picture_url }}" />
         </ion-avatar>
         <ion-card-header>
           <ion-card-title class="ion-text-center" id="worker-name">{{ workerInfo?.firstname }} {{ workerInfo?.lastname }}</ion-card-title>
-          <ion-card-subtitle class="ion-text-center"><ion-icon name="pin"></ion-icon> {{ workerInfo?.address }}</ion-card-subtitle>
+          <ion-card-subtitle class="ion-text-center"><ion-icon name="location"></ion-icon> {{ workerInfo?.address }}</ion-card-subtitle>
           <ion-card-subtitle class="ion-text-center"><ion-icon name="call"></ion-icon> {{ workerInfo?.mobile_number }}</ion-card-subtitle>
           <rating [rate]="rate"
             readonly="false" 
