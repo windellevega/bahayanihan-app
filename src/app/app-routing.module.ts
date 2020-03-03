@@ -5,13 +5,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/auth/token.interceptor';
 
 const routes: Routes = [
-  { path: 'main', loadChildren: './components/tabs/tabs.module#TabsPageModule', canActivate: [AuthGuard] },
-  { path: '', loadChildren: './components/login/login.module#LoginPageModule' },
-  { path: 'login', loadChildren: './components/login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './components/register/register.module#RegisterPageModule' },
-  { path: 'messaging', loadChildren: './components/messaging/messaging.module#MessagingPageModule' },
-  { path: 'message-logs', loadChildren: './components/message-logs/message-logs.module#MessageLogsPageModule' },
-
+  { path: 'main', loadChildren: './pages/tabs/tabs.module#TabsPageModule', canActivate: [AuthGuard] },
+  { path: '', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
+  { path: 'messaging', loadChildren: './pages/messaging/messaging.module#MessagingPageModule' },
+  { path: 'message-logs', loadChildren: './pages/message-logs/message-logs.module#MessageLogsPageModule' },
+  { path: 'transaction-form', loadChildren: './pages/transaction-form/transaction-form.module#TransactionFormPageModule' },
 
 ];
 @NgModule({

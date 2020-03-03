@@ -24,7 +24,7 @@ export class WorkersTabPage implements OnInit{
   }
 
   loadMap(skillId) {
-    this.router.navigate(['/main/tabs/map-tab'], { queryParams: { skillId: skillId}});
+    this.router.navigate(['/main/tabs/map-tab'], { queryParams: { skillId }});
   }
 
   async loadSkills() {
@@ -39,9 +39,9 @@ export class WorkersTabPage implements OnInit{
   }
 
   filterList(event) {
-    var value = event.target.value;
+    const value = event.target.value;
     this.skillsFiltered = this.skills;
-    if(value && value.trim() != '') {
+    if (value && value.trim() !== '') {
       this.skillsFiltered = this.skills.filter((skill) => {
         return (skill.skill_name.toLowerCase().indexOf(value.trim().toLowerCase()) > -1);
       });

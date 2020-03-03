@@ -7,11 +7,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage implements OnInit{
+export class TabsPage implements OnInit {
   lat: any;
   long: any;
   map: any;
-  
+
   constructor(
     private userService: UserService,
     private geo: Geolocation) {}

@@ -46,7 +46,7 @@ export class RegisterPage implements OnInit {
     private userService: UserService,
     private loadingController: LoadingController,
     private router: Router,
-    private formBuilder: FormBuilder) { 
+    private formBuilder: FormBuilder) {
       this.registerForm = this.formBuilder.group({
         firstname: ['', Validators.required],
         middlename: [''],
