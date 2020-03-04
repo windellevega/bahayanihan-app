@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
       }
       this.usernameOrEmail = '';
       this.password = '';
-      this.hideLogginInLoading();
+      this.hideLoggingInLoading();
     });
   }
 
@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
     await loading.present();
   }
 
-  async hideLogginInLoading() {
+  async hideLoggingInLoading() {
     const loading = await this.loadingController.getTop();
     loading.dismiss();
   }
