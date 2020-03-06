@@ -44,7 +44,7 @@ export class MapTabPage implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   ionViewWillEnter() {
@@ -105,7 +105,7 @@ export class MapTabPage implements OnInit {
   async getWorkers(skillId) {
     await this.userService.getWorkers(skillId)
       .subscribe(workers => {
-        for(let worker of workers) {
+        for(const worker of workers) {
           console.log(workers);
           //alert(worker.firstname);
           worker.mobile_number = this.userService.formatMobileNumber(worker.mobile_number);

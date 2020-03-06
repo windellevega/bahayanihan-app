@@ -10,11 +10,11 @@ import { LoadingController, IonContent } from '@ionic/angular';
   styleUrls: ['./messaging.page.scss'],
 })
 export class MessagingPage implements OnInit {
-  newMessage: string = '';
-  conversationId: number = 0;
-  userId: number = 0;
-  otherUserFirstname: string = '';
-  otherUserPic: string = '';
+  newMessage = '';
+  conversationId = 0;
+  userId = 0;
+  otherUserFirstname = '';
+  otherUserPic = '';
   messages: IMessage[];
 
   constructor(
@@ -55,7 +55,7 @@ export class MessagingPage implements OnInit {
       .subscribe(message => {
           if (message !== '') {
             console.log(message);
-            if (message.from_user_id != this.userId) {
+            if (message.from_user_id !== this.userId) {
               this.messages.push(message);
             }
             setTimeout(() => {

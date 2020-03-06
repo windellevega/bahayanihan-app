@@ -16,18 +16,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Job Type</ion-label>
-        <ion-select value="dog">
-          <ion-select-option value="1">Plumbing</ion-select-option>
-          <ion-select-option value="2">Carpentry</ion-select-option>
-          <ion-select-option value="3">Automotive</ion-select-option>
-          <ion-select-option value="4">Machinery</ion-select-option>
-          <ion-select-option value="5">Electrical</ion-select-option>
-          <ion-select-option value="6">Electronics</ion-select-option>
-          <ion-select-option value="7">Laundry</ion-select-option>
-          <ion-select-option value="8">Painting</ion-select-option>
-          <ion-select-option value="9">Driving</ion-select-option>
-          <ion-select-option value="10">Housekeeping</ion-select-option>
+        <ion-label position="stacked">Job Types</ion-label>
+        <ion-select>
+          <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}">{{ skill.skill_name }}</ion-select-option>
         </ion-select>
       </ion-item>
       

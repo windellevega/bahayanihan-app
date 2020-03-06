@@ -51,10 +51,10 @@ export class MessageLogsPage implements OnInit {
   loadMessages(conversationId, otherUserFirstname, otherUserPic) {
     this.router.navigate(['/messaging'], {
         queryParams: {
-          conversationId: conversationId,
+          conversationId,
           userId: this.userId,
-          otherUserFirstname: otherUserFirstname,
-          otherUserPic: otherUserPic
+          otherUserFirstname,
+          otherUserPic
         }
       });
   }
