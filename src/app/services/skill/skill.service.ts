@@ -13,6 +13,11 @@ export class SkillService {
 
   getSkills(): Observable<ISkill[]> {
     return this.httpClient.get<ISkill[]>(environment.apiUrl + '/api/skills')
-      .pipe()
+      .pipe();
+  }
+
+  getSkill(skillId): Observable<ISkill> {
+    return this.httpClient.get<ISkill>(environment.apiUrl + '/api/skill/' + skillId)
+      .pipe();
   }
 }

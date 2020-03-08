@@ -35,9 +35,9 @@ export class UserService{
         middlename: middleName,
         lastname: lastName,
         email_address: emailAdd,
-        username: username,
-        password: password,
-        address: address,
+        username,
+        password,
+        address,
         current_lat: '0.0',
         current_long: '0.0',
         mobile_number: mobileNo

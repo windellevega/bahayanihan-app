@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import {Router} from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -21,10 +21,11 @@ export class LoginPage implements OnInit {
     public geo: Geolocation,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController,
+    private toastController: ToastController) { }
 
   ngOnInit() {
-    // this.checkGPSPermission();
+    this.checkGPSPermission();
   }
 
   async login() {
@@ -34,7 +35,7 @@ export class LoginPage implements OnInit {
       if (status) {
         this.router.navigate(['/main/tabs']);
       } else {
-        alert('Incorrect login credentials.');
+        this.showToast('Incorrect login credentials');
       }
       this.usernameOrEmail = '';
       this.password = '';
@@ -54,6 +55,16 @@ export class LoginPage implements OnInit {
   async hideLoggingInLoading() {
     const loading = await this.loadingController.getTop();
     loading.dismiss();
+  }
+
+  async showToast(message) {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      duration: 2000,
+      message,
+    });
+
+    await toast.present();
   }
 
   checkGPSPermission() {

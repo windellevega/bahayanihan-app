@@ -1,12 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TransactionService } from 'src/app/services/transaction/transaction.service';
+import { LoadingController } from '@ionic/angular';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 @Component({
   selector: 'app-transactions-tab',
   templateUrl: 'transactions-tab.page.html',
   styleUrls: ['transactions-tab.page.scss']
 })
-export class TransactionsTabPage {
+export class TransactionsTabPage implements OnInit {
 
-  constructor() {}
+  transactions: any;
+  constructor(
+    private router: Router,
+    private transactionService: TransactionService,
+    private loadingController: LoadingController,
+    private nativeGeocoder: NativeGeocoder) {}
 
+  ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
+    this.loadTransactions();
+  }
+
+  async loadTransactions() {
+    this.showTransactionsLoading();
+
+    await this.transactionService.getTransactions()
+      .subscribe(data => {
+        this.transactions = data;
+        console.log(this.transactions);
+        this.hideTransactionsLoading();
+      });
+  }
+
+  async showTransactionsLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      spinner: 'lines',
+      translucent: true
+    });
+    await loading.present();
+  }
+
+  async hideTransactionsLoading() {
+    const loading = await this.loadingController.getTop();
+    loading.dismiss();
+  }
 }

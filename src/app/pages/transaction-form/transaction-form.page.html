@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="transactionForm">
+  <form [formGroup]="transactionForm" (ngSubmit)="createTransaction()">
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Job Description <ion-text color="danger">*</ion-text></ion-label>
@@ -17,7 +17,7 @@
 
       <ion-item>
         <ion-label position="stacked">Job Types</ion-label>
-        <ion-select>
+        <ion-select formControlName="job_type" (ionChange)="getSkillCost()">
           <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}">{{ skill.skill_name }}</ion-select-option>
         </ion-select>
       </ion-item>

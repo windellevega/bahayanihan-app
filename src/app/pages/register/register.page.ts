@@ -64,35 +64,32 @@ export class RegisterPage implements OnInit {
   }
 
   async registerUser() {
-    
-    if(this.registerForm.valid) {
+    if (this.registerForm.valid) {
       console.log(this.registerForm.value.mobile_number);
       await this.showSigningUpLoading();
 
       await this.userService.registerUser(
-        this.registerForm.value.firstname, 
-        this.registerForm.value.middlename, 
-        this.registerForm.value.lastname, 
-        this.registerForm.value.email_address, 
-        this.registerForm.value.username, 
-        this.registerForm.value.password, 
-        this.registerForm.value.mobile_number, 
+        this.registerForm.value.firstname,
+        this.registerForm.value.middlename,
+        this.registerForm.value.lastname,
+        this.registerForm.value.email_address,
+        this.registerForm.value.username,
+        this.registerForm.value.password,
+        this.registerForm.value.mobile_number,
         this.registerForm.value.address)
         .subscribe(res => {
-          if(res.access_token) {
+          if (res.access_token) {
             localStorage.setItem('access_token', res.access_token);
             this.router.navigate(['/main/tabs']);
-          }
-          else {
+          } else {
             this.router.navigate(['/register']);
           }
           this.hideSigningUpLoading();
         });
-    }
-    else {
+    } else {
       console.log('Invalid inputs');
     }
-    
+
   }
 
   async showSigningUpLoading() {
@@ -110,16 +107,15 @@ export class RegisterPage implements OnInit {
   }
 
   validateConfirmPassword() {
-    if(this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
       this.confirmPasswordError = 'Confirm Password must be the same with Password.';
-    }
-    else {
+    } else {
       this.confirmPasswordError = '';
     }
   }
 
   checkRegistrationForm() {
-    if(this.registerForm.valid && this.confirmPasswordError == '') {
+    if (this.registerForm.valid && this.confirmPasswordError === '') {
       return true;
     }
     return false;

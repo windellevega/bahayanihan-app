@@ -6,4 +6,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-card class="transaction-card" *ngFor="let transaction of transactions">
+    <ion-card-header>
+      <ion-card-title class="job-description">{{ transaction.skill.skill_name }}</ion-card-title>
+      <ion-card-content class="transaction-details">
+        <ion-icon name="cash-outline"></ion-icon> ₱ {{ transaction.total_cost }} <br>
+        <ion-icon name="calendar-outline"></ion-icon> {{ transaction.created_at | date: 'MMM d, yyy h:mm aaa' }} <br>
+        <ion-icon name="list-outline"></ion-icon> {{ (transaction.job_description.length > 35) ? (transaction.job_description | slice:0:35) + ' ...' : (transaction.job_description) }}
+      </ion-card-content>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 1">
+        <ion-label color="secondary">{{ transaction.transaction_status_history[0].status }}</ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 2">
+        <ion-label color="secondary"><b>{{ transaction.transaction_status_history[0].status }}</b></ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 3">
+        <ion-label color="primary">{{ transaction.transaction_status_history[0].status }}</ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 4">
+        <ion-label style="color:rgb(109, 202, 17)">{{ transaction.transaction_status_history[0].status }}</ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 5">
+        <ion-label style="color: forestgreen;"><b>{{ transaction.transaction_status_history[0].status }}</b></ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 6">
+        <ion-label color="danger">{{ transaction.transaction_status_history[0].status }}</ion-label>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

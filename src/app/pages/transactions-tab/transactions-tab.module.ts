@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TransactionsTabPage } from './transactions-tab.page';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
   imports: [
@@ -11,6 +12,9 @@ import { TransactionsTabPage } from './transactions-tab.page';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: TransactionsTabPage }])
+  ],
+  providers: [
+    NativeGeocoder
   ],
   declarations: [TransactionsTabPage]
 })

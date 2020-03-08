@@ -9,7 +9,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: 'workers-tab.page.html',
   styleUrls: ['workers-tab.page.scss']
 })
-export class WorkersTabPage implements OnInit{
+export class WorkersTabPage implements OnInit {
 
   skills: ISkill[];
   skillsFiltered: ISkill[];

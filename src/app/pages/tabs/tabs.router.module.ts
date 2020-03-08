@@ -7,7 +7,6 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      
       {
         path: 'workers-tab',
         children: [
