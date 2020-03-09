@@ -27,7 +27,15 @@ export class LoginPage implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    // this.checkGPSPermission();
+    this.checkGPSPermission();
+  }
+
+  ionViewWillEnter() {
+    if (!this.userAuthService.isTokenExpired()) {
+      this.getInitialMainPage(localStorage.getItem('is_worker'));
+    } else {
+      this.userAuthService.logout();
+    }
   }
 
   async login() {
@@ -35,12 +43,11 @@ export class LoginPage implements OnInit {
 
     await this.userAuthService.login(this.usernameOrEmail, this.password).subscribe(status => {
       if (status) {
-        console.log((Number(localStorage.getItem('is_worker'))));
-        if (Number(localStorage.getItem('is_worker')) === 0) {
-          this.router.navigate(['/main/tabs']);
-        } else {
-          this.router.navigate(['/worker-main']);
-        }
+        this.userService.getUserRole().subscribe(user => {
+          localStorage.removeItem('is_worker');
+          localStorage.setItem('is_worker', user.is_worker);
+          this.getInitialMainPage(user.is_worker);
+        });
       } else {
         this.showToast('Incorrect login credentials');
       }
@@ -50,12 +57,12 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async getUserRole() {
-    this.userService.getUserRole().subscribe(user => {
-        localStorage.removeItem('is_worker');
-        localStorage.setItem('is_worker', user.is_worker);
-        console.log(user.is_worker);
-    });
+  getInitialMainPage(isWorker) {
+    if (Number(isWorker) === 0) {
+      this.router.navigate(['/main/tabs']);
+    } else {
+      this.router.navigate(['/worker-main']);
+    }
   }
 
   async showLoggingInLoading() {
