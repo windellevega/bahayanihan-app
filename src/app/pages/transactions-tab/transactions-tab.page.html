@@ -19,18 +19,15 @@
         <ion-label color="secondary">{{ transaction.transaction_status_history[0].status }}</ion-label>
       </ion-card-subtitle>
       <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 2">
-        <ion-label color="secondary"><b>{{ transaction.transaction_status_history[0].status }}</b></ion-label>
-      </ion-card-subtitle>
-      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 3">
         <ion-label color="primary">{{ transaction.transaction_status_history[0].status }}</ion-label>
       </ion-card-subtitle>
-      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 4">
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 3">
         <ion-label style="color:rgb(109, 202, 17)">{{ transaction.transaction_status_history[0].status }}</ion-label>
       </ion-card-subtitle>
-      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 5">
-        <ion-label style="color: forestgreen;"><b>{{ transaction.transaction_status_history[0].status }}</b></ion-label>
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 4">
+        <ion-label style="color: forestgreen;">{{ transaction.transaction_status_history[0].status }}</ion-label>
       </ion-card-subtitle>
-      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 6">
+      <ion-card-subtitle *ngIf="transaction.transaction_status_history[0].id == 5">
         <ion-label color="danger">{{ transaction.transaction_status_history[0].status }}</ion-label>
       </ion-card-subtitle>
     </ion-card-header>

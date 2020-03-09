@@ -7,12 +7,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService{
+export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
   getOwnProfile() {
     return this.httpClient.get<IUser>(environment.apiUrl + '/api/profile')
+      .pipe();
+  }
+
+  getUserRole() {
+    return this.httpClient.get<any>(environment.apiUrl + '/api/user/role')
       .pipe();
   }
 
@@ -49,8 +54,7 @@ export class UserService{
     let route;
     if (skillId === 0) {
       route = environment.apiUrl + '/api/users/1';
-    } 
-    else {
+    } else {
       route = environment.apiUrl + '/api/users/1/' + skillId;
     }
     return this.httpClient.get<IUser[]>(route)

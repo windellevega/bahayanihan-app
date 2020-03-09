@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import {Router} from '@angular/router';
@@ -22,10 +23,11 @@ export class LoginPage implements OnInit {
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
     private loadingController: LoadingController,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.checkGPSPermission();
+    // this.checkGPSPermission();
   }
 
   async login() {
@@ -33,13 +35,26 @@ export class LoginPage implements OnInit {
 
     await this.userAuthService.login(this.usernameOrEmail, this.password).subscribe(status => {
       if (status) {
-        this.router.navigate(['/main/tabs']);
+        console.log((Number(localStorage.getItem('is_worker'))));
+        if (Number(localStorage.getItem('is_worker')) === 0) {
+          this.router.navigate(['/main/tabs']);
+        } else {
+          this.router.navigate(['/worker-main']);
+        }
       } else {
         this.showToast('Incorrect login credentials');
       }
       this.usernameOrEmail = '';
       this.password = '';
       this.hideLoggingInLoading();
+    });
+  }
+
+  async getUserRole() {
+    this.userService.getUserRole().subscribe(user => {
+        localStorage.removeItem('is_worker');
+        localStorage.setItem('is_worker', user.is_worker);
+        console.log(user.is_worker);
     });
   }
 

@@ -19,7 +19,7 @@ export class UserAuthService {
         client_id: environment.oauth.clientId,
         client_secret: environment.oauth.clientSecret,
         username: usernameOrEmail,
-        password: password
+        password
       }).pipe(
         tap(res => {
           localStorage.setItem('access_token', res.access_token);
@@ -34,6 +34,7 @@ export class UserAuthService {
   logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('is_worker');
   }
 
   getToken(): string {

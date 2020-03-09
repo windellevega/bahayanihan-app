@@ -12,7 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../workers-tab/workers-tab.module#WorkersTabPageModule'
+            loadChildren: '../categories-tab/categories-tab.module#CategoriesTabPageModule'
           }
         ]
       },

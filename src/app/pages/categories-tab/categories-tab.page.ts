@@ -6,10 +6,10 @@ import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-workers-tab',
-  templateUrl: 'workers-tab.page.html',
-  styleUrls: ['workers-tab.page.scss']
+  templateUrl: 'categories-tab.page.html',
+  styleUrls: ['categories-tab.page.scss']
 })
-export class WorkersTabPage implements OnInit {
+export class CategoriesTabPage implements OnInit {
 
   skills: ISkill[];
   skillsFiltered: ISkill[];

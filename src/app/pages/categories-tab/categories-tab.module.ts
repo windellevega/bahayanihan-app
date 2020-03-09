@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WorkersTabPage } from './workers-tab.page';
+import { CategoriesTabPage } from './categories-tab.page';
 import { SkillService } from 'src/app/services/skill/skill.service';
 
 @NgModule({
@@ -12,9 +12,9 @@ import { SkillService } from 'src/app/services/skill/skill.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild([{ path: '', component: WorkersTabPage }])
+    RouterModule.forChild([{ path: '', component: CategoriesTabPage }])
   ],
   providers: [SkillService],
-  declarations: [WorkersTabPage]
+  declarations: [CategoriesTabPage]
 })
-export class WorkersTabPageModule {}
+export class CategoriesTabPageModule {}
