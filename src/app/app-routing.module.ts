@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'transaction-form', loadChildren: './pages/transaction-form/transaction-form.module#TransactionFormPageModule' },
   // tslint:disable-next-line: max-line-length
   { path: 'worker-main', loadChildren: './pages/worker-tabs/worker-tabs.module#WorkerTabsPageModule', canActivate: [RoleGuard], data: { expectedRole: 1} },
+  { path: 'transaction-details/:id', loadChildren: './pages/transaction-details/transaction-details.module#TransactionDetailsPageModule' },
+
 ];
 @NgModule({
   imports: [

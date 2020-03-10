@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class WorkerinfoModalPage implements OnInit {
 
   @Input() workerInfo: IUser;
+  @Input() skillNeeded = 0;
 
   userInfo: IUser;
   rate: any = 5;
@@ -37,7 +38,8 @@ export class WorkerinfoModalPage implements OnInit {
   navigateToTransactionForm() {
     this.router.navigate(['/transaction-form'], {
       state: {
-        data: this.workerInfo
+        workerInfo: this.workerInfo,
+        skillNeeded: this.skillNeeded
       }
     });
     this.dismissModal();

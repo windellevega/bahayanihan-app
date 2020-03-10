@@ -12,6 +12,7 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@io
 export class TransactionsTabPage implements OnInit {
 
   transactions: any;
+  isWorker: any;
   constructor(
     private router: Router,
     private transactionService: TransactionService,
@@ -19,7 +20,7 @@ export class TransactionsTabPage implements OnInit {
     private nativeGeocoder: NativeGeocoder) {}
 
   ngOnInit() {
-
+    this.isWorker = localStorage.getItem('is_worker');
   }
 
   ionViewWillEnter() {
@@ -49,5 +50,9 @@ export class TransactionsTabPage implements OnInit {
   async hideTransactionsLoading() {
     const loading = await this.loadingController.getTop();
     loading.dismiss();
+  }
+
+  loadTransactionDetails(transactionId) {
+    this.router.navigate(['/transaction-details/' + transactionId]);
   }
 }

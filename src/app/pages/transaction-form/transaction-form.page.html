@@ -17,14 +17,14 @@
 
       <ion-item>
         <ion-label position="stacked">Job Types</ion-label>
-        <ion-select formControlName="job_type" (ionChange)="getSkillCost()">
-          <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}">{{ skill.skill_name }}</ion-select-option>
+        <ion-select formControlName="job_type" (ionChange)="getSkillCost()" [(ngModel)]="skillNeeded">
+          <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}" (selected)="skill.id === 7" >{{ skill.skill_name }}</ion-select-option>
         </ion-select>
       </ion-item>
       
       <ion-item>
         <ion-label position="stacked">Transaction Cost <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="text" formControlName="transaction_cost"></ion-input>
+        <ion-input type="text" (ionFocus)="getSkillCost()" formControlName="transaction_cost"></ion-input>
       </ion-item>
 
       <ion-button expand="block" id="transaction-button" color="none" type="submit">Create Transaction</ion-button>

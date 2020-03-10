@@ -33,7 +33,7 @@ export class MapTabPage implements OnInit {
   map: any;
   lat: any;
   long: any;
-  skillId: number = 0;
+  skillId = 0;
 
   constructor(
     public geo: Geolocation,
@@ -61,7 +61,8 @@ export class MapTabPage implements OnInit {
       component: WorkerinfoModalPage,
       cssClass: 'workerinfo-modal',
       componentProps: {
-        workerInfo: workerInfo
+        workerInfo,
+        skillNeeded: this.skillId
       }
     });
     await modal.present();
@@ -77,7 +78,7 @@ export class MapTabPage implements OnInit {
           this.map.remove();
         }
 
-        this.map = leaflet.map('map').setView([this.lat, this.long], 16); 
+        this.map = leaflet.map('map').setView([this.lat, this.long], 16);
 
         leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',

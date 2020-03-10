@@ -26,4 +26,9 @@ export class TransactionService {
         total_cost: totalCost
       }).pipe();
   }
+
+  getTransaction(transactionId): Observable<any> {
+    return this.httpClient.get<any>(environment.apiUrl + '/api/transaction/' + transactionId)
+      .pipe();
+  }
 }

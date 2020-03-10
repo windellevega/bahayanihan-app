@@ -1,15 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Transaction History
+      <p *ngIf="isWorker === '0'; else taskList" >Transaction History</p>
+      <ng-template #taskList>Tasks List</ng-template>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="transaction-card" *ngFor="let transaction of transactions">
+  <ion-card class="transaction-card" *ngFor="let transaction of transactions" (click)="loadTransactionDetails(transaction.id)">
     <ion-card-header>
-      <ion-card-title class="job-description">{{ transaction.skill.skill_name }}</ion-card-title>
+      <ion-card-title class="job-description">{{ transaction.skill.skill_name }} </ion-card-title>
       <ion-card-content class="transaction-details">
         <ion-icon name="cash-outline"></ion-icon> ₱ {{ transaction.total_cost }} <br>
         <ion-icon name="calendar-outline"></ion-icon> {{ transaction.created_at | date: 'MMM d, yyy h:mm aaa' }} <br>

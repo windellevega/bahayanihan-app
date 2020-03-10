@@ -16,6 +16,7 @@ export class TransactionFormPage implements OnInit {
   transactionForm: FormGroup;
   latitude: any;
   longitude: any;
+  skillNeeded = '0';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +34,12 @@ export class TransactionFormPage implements OnInit {
     }
 
   ngOnInit() {
-    this.workerInfo = history.state.data;
+    this.workerInfo = history.state.workerInfo;
+
+    if (history.state.skillNeeded !== 0) {
+      this.skillNeeded = String(history.state.skillNeeded);
+      this.getSkillCost();
+    }
 
     this.geo.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
