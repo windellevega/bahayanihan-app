@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { TransactionDetailsPage } from './transaction-details.page';
 import { Routes, RouterModule } from '@angular/router';
+import { TransactionLocationModalPageModule } from '../transaction-location-modal/transaction-location-modal.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TransactionLocationModalPageModule
   ],
   declarations: [TransactionDetailsPage]
 })

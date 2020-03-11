@@ -73,7 +73,7 @@ export class MapTabPage implements OnInit {
         this.lat = pos.coords.latitude;
         this.long = pos.coords.longitude;
 
-        if(this.map !== undefined) {
+        if (this.map !== undefined) {
           this.map.off();
           this.map.remove();
         }

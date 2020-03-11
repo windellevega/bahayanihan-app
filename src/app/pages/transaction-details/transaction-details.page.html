@@ -1,9 +1,79 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button class="back-button"></ion-back-button>
+    </ion-buttons>
     <ion-title>Transaction Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>
+            <span class="label">POSTED BY:</span><br>
+            <span class="detail">{{ transactionDetails?.hailer.firstname }} {{ transactionDetails?.hailer.middlename !== '' ? transactionDetails?.hailer.middlename + ' ' : '' }}{{ transactionDetails?.hailer.lastname }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-label>
+            <span class="label">DATE POSTED:</span><br>
+            <span class="detail">{{ transactionDetails?.created_at | date: 'MMM d, yyy h:mm aaa' }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="build-outline"></ion-icon>
+          <ion-label>
+            <span class="label">JOB TYPE:</span><br>
+            <span class="detail">{{ transactionDetails?.skill.skill_name }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>
+            <span class="label">WORKER:</span><br>
+            <span class="detail">{{ transactionDetails?.worker.firstname }} {{ transactionDetails?.worker.middlename !== '' ? transactionDetails?.worker.middlename + ' ' : '' }}{{ transactionDetails?.worker.lastname }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="cash-outline"></ion-icon>
+          <ion-label>
+            <span class="label">TOTAL COST:</span><br>
+            <span class="detail">₱{{ transactionDetails?.total_cost }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="analytics-outline"></ion-icon>
+          <ion-label>
+            <span class="label">STATUS:</span><br>
+            <ion-label color="secondary" *ngIf="transactionDetails?.transaction_status_history[0].id == 1">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+            <ion-label color="primary" *ngIf="transactionDetails?.transaction_status_history[0].id == 2">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+            <ion-label style="color:rgb(109, 202, 17)" *ngIf="transactionDetails?.transaction_status_history[0].id == 3">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+            <ion-label style="color: forestgreen;" *ngIf="transactionDetails?.transaction_status_history[0].id == 4">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+            <ion-label color="danger" *ngIf="transactionDetails?.transaction_status_history[0].id == 5">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>
+            <span class="label">JOB DESCRIPTION:</span><br>
+            <span class="detail">{{ transactionDetails?.job_description }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <p>
+            <span class="label">LOCATION:</span><br>
+            <span class="detail"><a (click)="showTransactionLocationModal()"><ion-icon name="map-outline"></ion-icon>Show Map</a></span>
+          </p>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <section>
+    <ion-button *ngIf="isWorker === '0'" expand="block" id="message-button" color="none">Message Worker</ion-button>
+    <ion-button *ngIf="isWorker === '1'" expand="block" id="message-button" color="none">Message Hailer</ion-button>
+  </section>
 </ion-content>
