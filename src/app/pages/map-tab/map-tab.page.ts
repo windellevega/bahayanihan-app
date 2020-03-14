@@ -34,6 +34,7 @@ export class MapTabPage implements OnInit {
   lat: any;
   long: any;
   skillId = 0;
+  userInfo: IUser;
 
   constructor(
     public geo: Geolocation,
@@ -44,7 +45,7 @@ export class MapTabPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getOwnProfile();
   }
 
   ionViewWillEnter() {
@@ -56,12 +57,20 @@ export class MapTabPage implements OnInit {
     //this.showWorkerInfoModal();
   }
 
+  getOwnProfile() {
+    this.userService.getOwnProfile().subscribe(data => {
+      this.userInfo = data;
+      console.log(this.userInfo);
+    });
+  }
+
   async showWorkerInfoModal(workerInfo: IUser) {
     const modal = await this.modalController.create({
       component: WorkerinfoModalPage,
       cssClass: 'workerinfo-modal',
       componentProps: {
         workerInfo,
+        userInfo: this.userInfo,
         skillNeeded: this.skillId
       }
     });

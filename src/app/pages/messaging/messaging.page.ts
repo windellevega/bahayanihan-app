@@ -12,10 +12,11 @@ import { LoadingController, IonContent } from '@ionic/angular';
 export class MessagingPage implements OnInit {
   newMessage = '';
   conversationId = 0;
-  userId = 0;
+  fromUserId = 0;
+  toUserId = 0;
   otherUserFirstname = '';
   otherUserPic = '';
-  messages: IMessage[];
+  messages: IMessage[] = [];
 
   constructor(
     private messagingService: MessagingService,
@@ -27,12 +28,17 @@ export class MessagingPage implements OnInit {
 
   ngOnInit() {
     this.conversationId = Number(this.activatedRoute.snapshot.queryParamMap.get('conversationId'));
-    this.userId = Number(this.activatedRoute.snapshot.queryParamMap.get('userId'));
+    this.fromUserId = Number(this.activatedRoute.snapshot.queryParamMap.get('fromUserId'));
+    this.toUserId = Number(this.activatedRoute.snapshot.queryParamMap.get('toUserId'));
     this.otherUserFirstname = this.activatedRoute.snapshot.queryParamMap.get('otherUserFirstname');
     this.otherUserPic = this.activatedRoute.snapshot.queryParamMap.get('otherUserPic');
 
-    this.getMessages();
-    console.log(this.conversationId, this.userId);
+    if (this.conversationId !== 0) {
+      this.listenToMessagingChannel();
+      this.getMessages();
+    }
+
+    console.log(this.conversationId, this.fromUserId);
   }
 
   async getMessages() {
@@ -43,7 +49,6 @@ export class MessagingPage implements OnInit {
         this.messages = data.messages;
         console.log(this.messages);
         this.hideMessagesLoading();
-        this.listenToMessagingChannel();
         setTimeout(() => {
           this.content.scrollToBottom(200);
         });
@@ -55,7 +60,7 @@ export class MessagingPage implements OnInit {
       .subscribe(message => {
           if (message !== '') {
             console.log(message);
-            if (message.from_user_id !== this.userId) {
+            if (message.from_user_id !== this.fromUserId) {
               this.messages.push(message);
             }
             setTimeout(() => {
@@ -80,10 +85,10 @@ export class MessagingPage implements OnInit {
   }
 
   sendMessage() {
-    this.messagingService.sendMessageToConversation(this.conversationId, this.newMessage).subscribe();
+    this.messagingService.sendMessageToConversation(this.conversationId, this.newMessage, this.toUserId).subscribe();
     this.messages.push({
       conversation_id: this.conversationId,
-      from_user_id: this.userId,
+      from_user_id: this.fromUserId,
       message: this.newMessage,
       is_read: false,
       created_at: new Date(),

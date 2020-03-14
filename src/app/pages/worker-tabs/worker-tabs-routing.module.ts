@@ -5,7 +5,7 @@ import { WorkerTabsPage } from './worker-tabs.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: WorkerTabsPage,
     children: [
       {
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/worker-main/transactions-tab',
+        redirectTo: '/worker-main/tabs/transactions-tab',
         pathMatch: 'full'
       }
     ]

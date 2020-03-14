@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
-import { LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { LoadingController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-message-logs',
@@ -11,14 +10,16 @@ import { Router } from '@angular/router';
 export class MessageLogsPage implements OnInit {
 
   conversations: any;
-  userId: number = 0;
+  userId = 0;
+  isWorker: any;
 
   constructor(
     private messagingService: MessagingService,
     private loadingController: LoadingController,
-    private router: Router) { }
+    private navCtrl: NavController) { }
 
   ngOnInit() {
+    this.isWorker = localStorage.getItem('is_worker');
     this.loadConversations();
   }
 
@@ -49,10 +50,11 @@ export class MessageLogsPage implements OnInit {
   }
 
   loadMessages(conversationId, otherUserFirstname, otherUserPic) {
-    this.router.navigate(['/messaging'], {
+    this.navCtrl.navigateRoot(['/messaging'], {
         queryParams: {
           conversationId,
-          userId: this.userId,
+          fromUserId: this.userId,
+          toUserId: 0,
           otherUserFirstname,
           otherUserPic
         }

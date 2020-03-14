@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TransactionService } from 'src/app/services/transaction/transaction.service';
-import { LoadingController } from '@ionic/angular';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { LoadingController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-transactions-tab',
@@ -14,10 +12,9 @@ export class TransactionsTabPage implements OnInit {
   transactions: any;
   isWorker: any;
   constructor(
-    private router: Router,
+    private navController: NavController,
     private transactionService: TransactionService,
-    private loadingController: LoadingController,
-    private nativeGeocoder: NativeGeocoder) {}
+    private loadingController: LoadingController) {}
 
   ngOnInit() {
     this.isWorker = localStorage.getItem('is_worker');
@@ -53,6 +50,6 @@ export class TransactionsTabPage implements OnInit {
   }
 
   loadTransactionDetails(transactionId) {
-    this.router.navigate(['/transaction-details/' + transactionId]);
+    this.navController.navigateRoot(['/transaction-details/' + transactionId]);
   }
 }

@@ -52,10 +52,23 @@ export class MessagingService {
       .pipe();
   }
 
-  sendMessageToConversation(conversationId, message): Observable<any> {
+  sendMessageToConversation(conversationId, message, toUserId): Observable<any> {
+    if (conversationId === 0) {
+      return this.httpClient.post<any>(environment.apiUrl + '/api/message', {
+        message,
+        to_user_id: toUserId
+      }).pipe();
+    }
+
     return this.httpClient.post<any>(environment.apiUrl + '/api/message', {
       conversation_id: conversationId,
-      message: message
+      message
     }).pipe();
+  }
+
+
+  getConversationWithUser(id) {
+    return this.httpClient.get<any>(environment.apiUrl + '/api/conversation-with-user/' + id)
+            .pipe();
   }
 }

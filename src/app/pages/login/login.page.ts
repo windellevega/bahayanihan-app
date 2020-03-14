@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
     if (Number(isWorker) === 0) {
       this.router.navigate(['/main/tabs']);
     } else {
-      this.router.navigate(['/worker-main']);
+      this.router.navigate(['/worker-main/tabs']);
     }
   }
 

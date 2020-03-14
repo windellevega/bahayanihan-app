@@ -14,7 +14,7 @@
 <ion-content id="content">
   <ion-grid>
     <ion-row *ngFor="let message of messages">
-      <ion-col offset="4" size="8" class="message my-message" *ngIf="userId == message.from_user_id">
+      <ion-col offset="4" size="8" class="message my-message" *ngIf="fromUserId == message.from_user_id">
         <strong class="user-name">You</strong><br>
         <p class="message-content">{{ message.message }}</p>
         <span class="time ion-text-right"><br>
@@ -22,12 +22,12 @@
         </span>
       </ion-col>
 
-      <ion-col size="2" class="image-col"  *ngIf="userId != message.from_user_id">
+      <ion-col size="2" class="image-col"  *ngIf="fromUserId != message.from_user_id">
         <ion-avatar class="user-image">
             <img [src]="message.user.profile_picture_url">
           </ion-avatar>
       </ion-col>
-      <ion-col size="7" class="message other-message" *ngIf="userId != message.from_user_id">
+      <ion-col size="7" class="message other-message" *ngIf="fromUserId != message.from_user_id">
         <strong class="user-name">{{ message.user.firstname }}</strong><br>
         <p class="message-content">{{ message.message }}</p>
         <span class="time ion-text-right"><br>

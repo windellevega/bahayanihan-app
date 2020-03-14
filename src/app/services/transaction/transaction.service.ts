@@ -31,4 +31,12 @@ export class TransactionService {
     return this.httpClient.get<any>(environment.apiUrl + '/api/transaction/' + transactionId)
       .pipe();
   }
+
+  updateTransactionStatus(transactionId, statusId): Observable<any> {
+    return this.httpClient.put<any>(environment.apiUrl + '/api/transaction/status/' + transactionId,
+    {
+      status: statusId
+    })
+    .pipe();
+  }
 }
