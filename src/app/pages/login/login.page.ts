@@ -28,11 +28,9 @@ export class LoginPage implements OnInit {
     private platform: Platform) { }
 
   ngOnInit() {
-    this.platform.ready().then(() => {
-      if (this.platform.is('hybrid')) {
-        this.checkGPSPermission();
-      }
-    });
+    if (this.platform.is('hybrid')) {
+      this.checkGPSPermission();
+    }
   }
 
   ionViewWillEnter() {
