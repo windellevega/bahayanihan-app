@@ -2,7 +2,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import {Router} from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -24,10 +24,15 @@ export class LoginPage implements OnInit {
     private locationAccuracy: LocationAccuracy,
     private loadingController: LoadingController,
     private toastController: ToastController,
-    private userService: UserService) { }
+    private userService: UserService,
+    private platform: Platform) { }
 
   ngOnInit() {
-    this.checkGPSPermission();
+    this.platform.ready().then(() => {
+      if (this.platform.is('hybrid')) {
+        this.checkGPSPermission();
+      }
+    });
   }
 
   ionViewWillEnter() {

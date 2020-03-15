@@ -1,11 +1,14 @@
 <ion-header class="header">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button class="back-button" defaultHref="/message-logs"></ion-back-button>
+    </ion-buttons>
     <ion-item lines="none" class="message-header">
       <ion-avatar slot="start">
         <img [src]="otherUserPic">
       </ion-avatar>
       <ion-label>
-        <h2 class="recepient-name">{{ otherUserFirstname }}</h2>
+        <h2 class="recipient-name">{{ otherUserFirstname }}</h2>
       </ion-label>
     </ion-item>
   </ion-toolbar>

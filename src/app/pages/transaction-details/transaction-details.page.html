@@ -51,11 +51,14 @@
           <ion-icon name="analytics-outline"></ion-icon>
           <ion-label>
             <span class="label">STATUS:</span><br>
-            <ion-label color="secondary" *ngIf="transactionDetails?.transaction_status_history[0].id === 1">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
-            <ion-label color="primary" *ngIf="transactionDetails?.transaction_status_history[0].id === 2">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
-            <ion-label style="color:rgb(109, 202, 17)" *ngIf="transactionDetails?.transaction_status_history[0].id === 3">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
-            <ion-label style="color: forestgreen;" *ngIf="transactionDetails?.transaction_status_history[0].id === 4">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
-            <ion-label color="danger" *ngIf="transactionDetails?.transaction_status_history[0].id === 5">{{ transactionDetails?.transaction_status_history[0].status }}</ion-label>
+            <ion-label>
+              <span *ngIf="transactionDetails?.transaction_status_history[0].id === 1" style="color:#0cd1e8;">{{ transactionDetails?.transaction_status_history[0].status }}</span>
+              <span *ngIf="transactionDetails?.transaction_status_history[0].id === 2" style="color:#3880ff;">{{ transactionDetails?.transaction_status_history[0].status }}</span>
+              <span *ngIf="transactionDetails?.transaction_status_history[0].id === 3" style="color:rgb(109, 202, 17)">{{ transactionDetails?.transaction_status_history[0].status }}</span>
+              <span *ngIf="transactionDetails?.transaction_status_history[0].id === 4" style="color: forestgreen;">{{ transactionDetails?.transaction_status_history[0].status }}</span>
+              <span *ngIf="transactionDetails?.transaction_status_history[0].id === 5" style="color:#f04141;">{{ transactionDetails?.transaction_status_history[0].status }}</span>
+              <span class="detail"> ({{ transactionDetails?.transaction_status_history[0].pivot.created_at | date: 'MMM d, yyy h:mm aaa' }})</span>
+            </ion-label>
           </ion-label>
         </ion-item>
         <ion-item>
