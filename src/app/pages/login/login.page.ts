@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    // this.checkGPSPermission();
+    this.checkGPSPermission();
   }
 
   ionViewWillEnter() {
