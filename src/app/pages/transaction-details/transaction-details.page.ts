@@ -94,7 +94,7 @@ export class TransactionDetailsPage implements OnInit {
           this.navigateToMessaging(0, this.transactionDetails.worker_id, this.transactionDetails.hailer_id,
             this.transactionDetails.hailer.firstname, this.transactionDetails.hailer.profile_picture_url);
         } else {
-          this.navigateToMessaging(data[0].id, this.transactionDetails.worker_id, this.transactionDetails.hailer_id,
+          this.navigateToMessaging(data.id, this.transactionDetails.worker_id, this.transactionDetails.hailer_id,
             this.transactionDetails.hailer.firstname, this.transactionDetails.hailer.profile_picture_url);
         }
       });
@@ -104,7 +104,7 @@ export class TransactionDetailsPage implements OnInit {
           this.navigateToMessaging(0, this.transactionDetails.hailer_id, this.transactionDetails.worker_id,
             this.transactionDetails.worker.firstname, this.transactionDetails.worker.profile_picture_url);
         } else {
-          this.navigateToMessaging(data[0].id, this.transactionDetails.hailer_id, this.transactionDetails.worker_id,
+          this.navigateToMessaging(data.id, this.transactionDetails.hailer_id, this.transactionDetails.worker_id,
             this.transactionDetails.worker.firstname, this.transactionDetails.worker.profile_picture_url);
         }
       });

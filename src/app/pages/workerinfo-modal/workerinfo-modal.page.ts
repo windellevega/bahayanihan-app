@@ -55,7 +55,7 @@ export class WorkerinfoModalPage implements OnInit {
         this.navigateToMessaging(0, this.userInfo.id, this.workerInfo.id,
           this.workerInfo.firstname, this.workerInfo.profile_picture_url);
       } else {
-        this.navigateToMessaging(data[0].id, this.userInfo.id, this.workerInfo.id,
+        this.navigateToMessaging(data.id, this.userInfo.id, this.workerInfo.id,
           this.workerInfo.firstname, this.workerInfo.profile_picture_url);
       }
     });
