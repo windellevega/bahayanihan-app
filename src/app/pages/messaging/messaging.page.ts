@@ -9,7 +9,7 @@ import { LoadingController, IonContent } from '@ionic/angular';
   templateUrl: './messaging.page.html',
   styleUrls: ['./messaging.page.scss'],
 })
-export class MessagingPage implements OnInit {
+export class MessagingPage {
   newMessage = '';
   conversationId = 0;
   fromUserId = 0;
@@ -26,7 +26,7 @@ export class MessagingPage implements OnInit {
 
   @ViewChild(IonContent, { static: true }) content: IonContent;
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.conversationId = Number(this.activatedRoute.snapshot.queryParamMap.get('conversationId'));
     this.fromUserId = Number(this.activatedRoute.snapshot.queryParamMap.get('fromUserId'));
     this.toUserId = Number(this.activatedRoute.snapshot.queryParamMap.get('toUserId'));
@@ -36,9 +36,10 @@ export class MessagingPage implements OnInit {
     if (this.conversationId !== 0) {
       this.listenToMessagingChannel();
       this.getMessages();
+      this.markMessagesAsRead(this.conversationId, this.toUserId);
     }
 
-    console.log(this.conversationId, this.fromUserId);
+    console.log(this.toUserId, this.fromUserId);
   }
 
   async getMessages() {
@@ -106,4 +107,10 @@ export class MessagingPage implements OnInit {
     });
   }
 
+  markMessagesAsRead(conversationId, fromUserId) {
+    this.messagingService.markMessagesAsRead(conversationId, fromUserId)
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
 }

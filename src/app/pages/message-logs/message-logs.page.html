@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item (click)="loadMessages(conversation.id, conversation.users[0].firstname, conversation.users[0].profile_picture_url)" *ngFor="let conversation of conversations">
+  <ion-item (click)="loadMessages(conversation.id, conversation.users[0].id, conversation.users[0].firstname, conversation.users[0].profile_picture_url)" *ngFor="let conversation of conversations">
     <ion-avatar slot="start">
       <img [src]="conversation.users[0].profile_picture_url">
     </ion-avatar>

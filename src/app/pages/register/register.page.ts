@@ -9,7 +9,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   registerForm: FormGroup;
   confirmPasswordError: string;
 
@@ -59,9 +59,6 @@ export class RegisterPage implements OnInit {
         address: ['', Validators.required]
       });
     }
-
-  ngOnInit() {
-  }
 
   async registerUser() {
     if (this.registerForm.valid) {

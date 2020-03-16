@@ -9,7 +9,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: 'categories-tab.page.html',
   styleUrls: ['categories-tab.page.scss']
 })
-export class CategoriesTabPage implements OnInit {
+export class CategoriesTabPage {
 
   skills: ISkill[];
   skillsFiltered: ISkill[];
@@ -19,7 +19,7 @@ export class CategoriesTabPage implements OnInit {
     private loadingController: LoadingController) {
     }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.loadSkills();
   }
 

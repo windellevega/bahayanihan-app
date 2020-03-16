@@ -66,9 +66,19 @@ export class MessagingService {
     }).pipe();
   }
 
-
   getConversationWithUser(id) {
     return this.httpClient.get<any>(environment.apiUrl + '/api/conversation-with-user/' + id)
             .pipe();
+  }
+
+  markMessagesAsRead(conversationId, fromUserId) {
+    return this.httpClient.put<any>(environment.apiUrl + '/api/messages/mark-as-read/' + conversationId, {
+      from_user_id: fromUserId,
+    }).pipe();
+  }
+
+  getConversationsWithUnread() {
+    return this.httpClient.get<any>(environment.apiUrl + '/api/conversations/with-unread')
+    .pipe();
   }
 }

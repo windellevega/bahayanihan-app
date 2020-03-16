@@ -29,7 +29,7 @@ Marker.prototype.options.icon = iconDefault;
   templateUrl: './map-tab.page.html',
   styleUrls: ['./map-tab.page.scss'],
 })
-export class MapTabPage implements OnInit {
+export class MapTabPage {
   map: any;
   lat: any;
   long: any;
@@ -44,11 +44,8 @@ export class MapTabPage implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.getOwnProfile();
-  }
-
   ionViewWillEnter() {
+    this.getOwnProfile();
     this.skillId = Number(this.activatedRoute.snapshot.queryParamMap.get('skillId'));
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
       this.skillId = Number(queryParams.get('skillId'));

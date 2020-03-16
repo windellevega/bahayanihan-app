@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { MessagingService } from 'src/app/services/messaging/messaging.service';
   templateUrl: './workerinfo-modal.page.html',
   styleUrls: ['./workerinfo-modal.page.scss'],
 })
-export class WorkerinfoModalPage implements OnInit {
+export class WorkerinfoModalPage {
 
   @Input() workerInfo: IUser;
   @Input() skillNeeded = 0;
@@ -24,10 +24,6 @@ export class WorkerinfoModalPage implements OnInit {
     private messagingService: MessagingService) {
 
     }
-
-  ngOnInit() {
-
-  }
 
   async dismissModal() {
     const modal = await this.modalController.getTop();

@@ -7,7 +7,7 @@ import { LoadingController, NavController } from '@ionic/angular';
   templateUrl: './message-logs.page.html',
   styleUrls: ['./message-logs.page.scss'],
 })
-export class MessageLogsPage implements OnInit {
+export class MessageLogsPage {
 
   conversations: any;
   userId = 0;
@@ -18,7 +18,7 @@ export class MessageLogsPage implements OnInit {
     private loadingController: LoadingController,
     private navCtrl: NavController) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.isWorker = localStorage.getItem('is_worker');
     this.loadConversations();
   }
@@ -49,12 +49,12 @@ export class MessageLogsPage implements OnInit {
     loading.dismiss();
   }
 
-  loadMessages(conversationId, otherUserFirstname, otherUserPic) {
+  loadMessages(conversationId, toUserId, otherUserFirstname, otherUserPic) {
     this.navCtrl.navigateRoot(['/messaging'], {
         queryParams: {
           conversationId,
           fromUserId: this.userId,
-          toUserId: 0,
+          toUserId,
           otherUserFirstname,
           otherUserPic
         }

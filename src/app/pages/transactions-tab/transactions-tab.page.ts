@@ -7,7 +7,7 @@ import { LoadingController, NavController } from '@ionic/angular';
   templateUrl: 'transactions-tab.page.html',
   styleUrls: ['transactions-tab.page.scss']
 })
-export class TransactionsTabPage implements OnInit {
+export class TransactionsTabPage {
 
   transactions: any;
   isWorker: any;
@@ -16,11 +16,8 @@ export class TransactionsTabPage implements OnInit {
     private transactionService: TransactionService,
     private loadingController: LoadingController) {}
 
-  ngOnInit() {
-    this.isWorker = localStorage.getItem('is_worker');
-  }
-
   ionViewWillEnter() {
+    this.isWorker = localStorage.getItem('is_worker');
     this.loadTransactions();
   }
 

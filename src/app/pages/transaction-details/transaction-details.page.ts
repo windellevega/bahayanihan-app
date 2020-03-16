@@ -10,7 +10,7 @@ import { MessagingService } from 'src/app/services/messaging/messaging.service';
   templateUrl: './transaction-details.page.html',
   styleUrls: ['./transaction-details.page.scss'],
 })
-export class TransactionDetailsPage implements OnInit {
+export class TransactionDetailsPage {
   transactionId: any;
   transactionDetails: any;
   isWorker: any;
@@ -24,7 +24,7 @@ export class TransactionDetailsPage implements OnInit {
     private navCtrl: NavController) {
     }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.transactionId = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.activatedRoute.snapshot.paramMap.get('id'));
     this.getTransactionDetails(this.transactionId);

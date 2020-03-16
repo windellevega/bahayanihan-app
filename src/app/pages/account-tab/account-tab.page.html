@@ -29,7 +29,7 @@
         <ion-label>
           <p><ion-icon name="chatbubbles"></ion-icon> Message Logs</p>
         </ion-label>
-        <ion-badge color="danger" slot="end">1</ion-badge>
+        <ion-badge *ngIf="messageLogsCount > 0" color="danger" slot="end">{{ messageLogsCount }}</ion-badge>
       </ion-item>
       <ion-item lines="inset">
         <ion-label>

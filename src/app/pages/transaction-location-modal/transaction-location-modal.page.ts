@@ -22,7 +22,7 @@ Marker.prototype.options.icon = iconDefault;
   templateUrl: './transaction-location-modal.page.html',
   styleUrls: ['./transaction-location-modal.page.scss'],
 })
-export class TransactionLocationModalPage implements OnInit {
+export class TransactionLocationModalPage {
 
   @Input() transactionLong: any;
   @Input() transactionLat: any;
@@ -30,9 +30,6 @@ export class TransactionLocationModalPage implements OnInit {
   constructor(
     private modalController: ModalController
   ) { }
-
-  ngOnInit() {
-  }
 
   ionViewWillEnter() {
     this.loadLeafletMap();

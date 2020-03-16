@@ -11,7 +11,7 @@ import { ToastController, LoadingController } from '@ionic/angular';
   templateUrl: './transaction-form.page.html',
   styleUrls: ['./transaction-form.page.scss'],
 })
-export class TransactionFormPage implements OnInit {
+export class TransactionFormPage {
   workerInfo: IUser;
   transactionForm: FormGroup;
   latitude: any;
@@ -33,7 +33,7 @@ export class TransactionFormPage implements OnInit {
       });
     }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.workerInfo = history.state.workerInfo;
 
     if (history.state.skillNeeded !== 0) {

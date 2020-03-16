@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import { UserService } from '../../services/user/user.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { LoadingController } from '@ionic/angular';
+import { MessagingService } from 'src/app/services/messaging/messaging.service';
 
 
 @Component({
@@ -11,17 +12,21 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: 'account-tab.page.html',
   styleUrls: ['account-tab.page.scss']
 })
-export class AccountTabPage implements OnInit{
+export class AccountTabPage {
 
   userProfile: IUser;
+  messageLogsCount = 0;
+
   constructor(
     private userAuthService: UserAuthService,
     private userService: UserService,
     private router: Router,
-    private loadingController: LoadingController) {}
+    private loadingController: LoadingController,
+    private messagingService: MessagingService) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getOwnProfile();
+    this.getConversationsWithUnread();
   }
 
   logout() {
@@ -53,5 +58,12 @@ export class AccountTabPage implements OnInit{
   async hideUserProfileLoading() {
     const loading = await this.loadingController.getTop();
     loading.dismiss();
+  }
+
+  getConversationsWithUnread() {
+    this.messagingService.getConversationsWithUnread()
+      .subscribe(data => {
+        this.messageLogsCount = data.conversations_with_unread;
+      });
   }
 }

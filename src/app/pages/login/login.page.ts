@@ -9,7 +9,7 @@ import { LoadingController, ToastController, Platform } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   usernameOrEmail: string;
   password: string;
 
@@ -19,9 +19,6 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private toastController: ToastController,
     private userService: UserService) { }
-
-  ngOnInit() {
-  }
 
   ionViewWillEnter() {
     if (!this.userAuthService.isTokenExpired()) {
