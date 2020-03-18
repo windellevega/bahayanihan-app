@@ -17,6 +17,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './services/user/user.service';
 
 
 @NgModule({

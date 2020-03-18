@@ -34,12 +34,12 @@ export class MessagingPage {
     this.otherUserPic = this.activatedRoute.snapshot.queryParamMap.get('otherUserPic');
 
     if (this.conversationId !== 0) {
-      this.listenToMessagingChannel();
+      this.listenToMessagingConversationChannel();
       this.getMessages();
       this.markMessagesAsRead(this.conversationId, this.toUserId);
     }
 
-    console.log(this.toUserId, this.fromUserId);
+    console.log(this.toUserId);
   }
 
   async getMessages() {
@@ -56,13 +56,15 @@ export class MessagingPage {
       });
   }
 
-  listenToMessagingChannel() {
-    this.messagingService.listenNewMessage(this.conversationId)
+  listenToMessagingConversationChannel() {
+    this.messagingService.listenNewMessageConversationChannel(this.conversationId)
       .subscribe(message => {
           if (message !== '') {
             console.log(message);
             if (message.from_user_id !== this.fromUserId) {
+              console.log(message);
               this.messages.push(message);
+              this.markMessagesAsRead(this.conversationId, this.toUserId);
             }
             setTimeout(() => {
               this.content.scrollToBottom(200);
@@ -112,5 +114,9 @@ export class MessagingPage {
       .subscribe(data => {
         console.log(data);
       });
+  }
+
+  ionViewWillLeave() {
+    this.messagingService.leaveNewMessageConversationChannel(this.conversationId);
   }
 }

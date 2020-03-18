@@ -29,17 +29,34 @@ export class MessagingService {
         },
     },
     });
-    console.log(this.echo);
   }
 
-  listenNewMessage(id): Observable<any> {
+  listenNewMessageConversationChannel(id): Observable<any> {
     console.log('Listening to conversation.' + id + ' channel...');
     this.echo.private('conversation.' + id)
-      .listen('NewMessage', (message) => {
+      .listen('NewMessageConversation', (message) => {
         this.message$.next(message);
       });
     console.log(this.echo);
     return this.message$.asObservable();
+  }
+
+  listenNewMessageUserChannel(id): Observable<any> {
+    console.log('Listening to message-log.' + id + ' channel...');
+    this.echo.private('message-log.' + id)
+      .listen('NewMessageUser', (message) => {
+        this.message$.next(message);
+      });
+    console.log(this.echo);
+    return this.message$.asObservable();
+  }
+
+  leaveNewMessageConversationChannel(id) {
+    this.echo.leave('conversation.' + id);
+  }
+
+  leaveNewMessageUserChannel(id) {
+    this.echo.leave('message-log.' + id);
   }
 
   getConversations(): Observable<any> {
@@ -62,6 +79,7 @@ export class MessagingService {
 
     return this.httpClient.post<any>(environment.apiUrl + '/api/message', {
       conversation_id: conversationId,
+      to_user_id: toUserId,
       message
     }).pipe();
   }

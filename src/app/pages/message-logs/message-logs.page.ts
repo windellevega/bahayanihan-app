@@ -19,18 +19,21 @@ export class MessageLogsPage {
     private navCtrl: NavController) { }
 
   ionViewWillEnter() {
+    this.conversations = [];
+    console.log(this.conversations);
     this.isWorker = localStorage.getItem('is_worker');
     this.loadConversations();
   }
 
-  async loadConversations() {
+  loadConversations() {
     this.showConversationsLoading();
 
-    await this.messagingService.getConversations()
+    this.messagingService.getConversations()
       .subscribe(data => {
-        console.log(data);
+        console.log(data.conversations);
         this.userId = data.id;
         this.conversations = data.conversations;
+        this.listenToMessagingUserChannel(data.id);
         this.hideConversationsLoading();
       });
   }
@@ -59,5 +62,23 @@ export class MessageLogsPage {
           otherUserPic
         }
       });
+  }
+
+  listenToMessagingUserChannel(userId) {
+    this.messagingService.listenNewMessageUserChannel(userId)
+      .subscribe(message => {
+        if (message !== '') {
+          this.conversations.find(conversation => {
+            if (conversation.id === message.conversation_id && conversation.latest_message.id !== message.id) {
+              conversation.latest_message = message;
+              conversation.unread_messages_count++;
+            }
+          });
+        }
+      });
+  }
+
+  ionViewWillLeave() {
+    this.messagingService.leaveNewMessageUserChannel(this.userId);
   }
 }

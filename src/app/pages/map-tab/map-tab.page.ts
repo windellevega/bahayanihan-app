@@ -10,19 +10,27 @@ import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { ActivatedRoute } from '@angular/router';
 
-const iconRetinaUrl = 'assets/marker_icons/marker-icon-2x.png';
-const iconUrl = 'assets/marker_icons/marker-icon.png';
+const iconUrlWorkers = 'assets/marker_icons/marker-icon.png';
+const iconUrlUser = 'assets/marker_icons/user-marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = icon({
-  iconRetinaUrl,
-  iconUrl,
+  iconUrl: iconUrlWorkers,
   shadowUrl,
   iconSize: [45, 45],
   iconAnchor: [12, 45],
   shadowSize: [50, 50],
   shadowAnchor: [5, 50]
 });
-Marker.prototype.options.icon = iconDefault;
+
+const iconUser = icon({
+  iconUrl: iconUrlUser,
+  shadowUrl,
+  iconSize: [45, 45],
+  iconAnchor: [12, 45],
+  shadowSize: [50, 50],
+  shadowAnchor: [5, 50]
+});
+// Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-map-tab',
@@ -91,7 +99,7 @@ export class MapTabPage {
           zoomControl: true
         })
         .addTo(this.map);
-
+        Marker.prototype.options.icon = iconUser;
         leaflet.marker([this.lat, this.long]).addTo(this.map);
         this.getWorkers(this.skillId);
         /*leaflet.marker([17.6070761, 121.7296232]).addTo(this.map).on('click', () => {
@@ -110,6 +118,7 @@ export class MapTabPage {
   }
 
   async getWorkers(skillId) {
+    Marker.prototype.options.icon = iconDefault;
     await this.userService.getWorkers(skillId)
       .subscribe(workers => {
         for(const worker of workers) {

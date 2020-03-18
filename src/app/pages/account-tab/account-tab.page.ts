@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/auth/user-auth.service';
 import { UserService } from '../../services/user/user.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { LoadingController } from '@ionic/angular';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
@@ -14,19 +14,21 @@ import { MessagingService } from 'src/app/services/messaging/messaging.service';
 })
 export class AccountTabPage {
 
-  userProfile: IUser;
   messageLogsCount = 0;
+  userProfile: IUser;
 
   constructor(
     private userAuthService: UserAuthService,
     private userService: UserService,
     private router: Router,
     private loadingController: LoadingController,
-    private messagingService: MessagingService) {}
+    private messagingService: MessagingService) { }
 
   ionViewWillEnter() {
     this.getOwnProfile();
     this.getConversationsWithUnread();
+    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
   }
 
   logout() {
@@ -64,6 +66,15 @@ export class AccountTabPage {
     this.messagingService.getConversationsWithUnread()
       .subscribe(data => {
         this.messageLogsCount = data.conversations_with_unread;
+      });
+  }
+
+  listenToMessagingUserChannel(userId) {
+    this.messagingService.listenNewMessageUserChannel(userId)
+      .subscribe(message => {
+        if (message !== '') {
+          this.getConversationsWithUnread();
+        }
       });
   }
 }

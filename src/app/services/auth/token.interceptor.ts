@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public userAuthService: UserAuthService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${this.userAuthService.getToken()}`

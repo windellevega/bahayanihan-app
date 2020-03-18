@@ -53,6 +53,18 @@ export class UserAuthService {
     return date;
   }
 
+  getUserIdFomToken(): number {
+    const token = this.getToken();
+
+    if (!token) {
+      return 0;
+    }
+
+    const decoded = jwt_decode(token);
+
+    return Number(decoded.sub);
+  }
+
   isTokenExpired(token?: string): boolean {
     if (!token) {
       token = this.getToken();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
-import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/services/auth/user-auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -19,11 +19,13 @@ export class TabsPage {
     private userService: UserService,
     private geo: Geolocation,
     private messagingService: MessagingService,
-    private router: Router) {}
+    private userAuthService: UserAuthService) { }
 
   ionViewWillEnter() {
     this.updateUserLocation();
     this.getConversationsWithUnread();
+    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
   }
 
   updateUserLocation() {
@@ -40,6 +42,15 @@ export class TabsPage {
       .subscribe(data => {
         console.log(data.conversations_with_unread);
         this.conversationsWithUnreadCount = data.conversations_with_unread;
+      });
+  }
+
+  listenToMessagingUserChannel(userId) {
+    this.messagingService.listenNewMessageUserChannel(userId)
+      .subscribe(message => {
+        if (message !== '') {
+          this.getConversationsWithUnread();
+        }
       });
   }
 }
