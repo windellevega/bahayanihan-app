@@ -3,8 +3,9 @@ import { UserAuthService } from '../../services/auth/user-auth.service';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/interfaces/user.interface';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController, NavController } from '@ionic/angular';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
+import { TransactionService } from 'src/app/services/transaction/transaction.service';
 
 
 @Component({
@@ -16,19 +17,29 @@ export class AccountTabPage {
 
   messageLogsCount = 0;
   userProfile: IUser;
+  isWorker: any;
+  transactionSubscription: any;
 
   constructor(
     private userAuthService: UserAuthService,
     private userService: UserService,
     private router: Router,
     private loadingController: LoadingController,
-    private messagingService: MessagingService) { }
+    private messagingService: MessagingService,
+    private transactionService: TransactionService,
+    private alertController: AlertController,
+    private navController: NavController) { }
 
   ionViewWillEnter() {
+    this.isWorker = localStorage.getItem('is_worker');
     this.getOwnProfile();
     this.getConversationsWithUnread();
     this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
     this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
+
+    if (this.isWorker === '1') {
+      this.listenToNewTransactionChannel(this.userAuthService.getUserIdFomToken());
+    }
   }
 
   logout() {
@@ -76,5 +87,38 @@ export class AccountTabPage {
           this.getConversationsWithUnread();
         }
       });
+  }
+
+  listenToNewTransactionChannel(userId) {
+    this.transactionSubscription = this.transactionService.transaction$
+      .subscribe(async transaction => {
+        if (transaction !== '') {
+          console.log(transaction);
+          const alert = await this.alertController.create({
+            header: 'New Task Received',
+            message: 'A user has requested for your ' + transaction.skill.skill_name + 'service.',
+            buttons: [
+              {
+                text: 'View Later',
+                role: 'cancel',
+                cssClass: 'secondary',
+              },
+              {
+                text: 'View Tasks',
+                handler: () => {
+                  this.transactionService.transaction$.next('');
+                  this.navController.navigateRoot(['worker-main/tabs/transactions-tab']);
+                }
+              }
+            ]
+          });
+          await alert.present();
+        }
+      });
+  }
+
+  ionViewWillLeave() {
+    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
+    this.transactionSubscription.unsubscribe();
   }
 }

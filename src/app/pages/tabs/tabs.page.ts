@@ -53,4 +53,8 @@ export class TabsPage {
         }
       });
   }
+
+  ionViewWillLeave() {
+    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
+  }
 }

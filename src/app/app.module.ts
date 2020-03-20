@@ -18,6 +18,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user/user.service';
+import { TransactionService } from './services/transaction/transaction.service';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { UserService } from './services/user/user.service';
     SplashScreen,
     AuthGuard,
     RoleGuard,
+    TransactionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

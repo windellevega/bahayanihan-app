@@ -3,6 +3,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from 'src/app/services/user/user.service';
 import { MessagingService } from 'src/app/services/messaging/messaging.service';
 import { UserAuthService } from 'src/app/services/auth/user-auth.service';
+import { TransactionService } from 'src/app/services/transaction/transaction.service';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-worker-tabs',
@@ -16,13 +18,15 @@ export class WorkerTabsPage {
     private userService: UserService,
     private geo: Geolocation,
     private messagingService: MessagingService,
-    private userAuthService: UserAuthService) { }
+    private userAuthService: UserAuthService,
+    private transactionService: TransactionService) { }
 
   ionViewWillEnter() {
     this.updateUserLocation();
     this.getConversationsWithUnread();
     this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
     this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToNewTransactionChannel(this.userAuthService.getUserIdFomToken());
   }
 
   updateUserLocation() {
@@ -49,5 +53,10 @@ export class WorkerTabsPage {
           this.getConversationsWithUnread();
         }
       });
+  }
+
+  listenToNewTransactionChannel(userId) {
+    this.transactionService.listenNewTransactionChannel(userId)
+      .subscribe();
   }
 }

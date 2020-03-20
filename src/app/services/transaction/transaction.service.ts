@@ -1,14 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
+  echo: any;
+  transaction$ = new BehaviorSubject<any>('');
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    const pusher = Pusher;
+    this.echo = new Echo({
+      broadcaster: 'pusher',
+      key: '5d48753513e0ef60a4d1',
+      cluster: 'ap1',
+      authEndpoint: environment.apiUrl + '/broadcasting/auth',
+      encrypted: true,
+      auth: {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('access_token')
+        },
+      },
+    });
+  }
 
   getTransactions(): Observable<any> {
     return this.httpClient.get<any>(environment.apiUrl + '/api/transactions')
@@ -38,5 +56,19 @@ export class TransactionService {
       status: statusId
     })
     .pipe();
+  }
+
+  listenNewTransactionChannel(id): Observable<any> {
+    console.log('Listening to transactions.' + id + ' channel...');
+    this.echo.private('transactions.' + id)
+      .listen('NewTransaction', (transaction) => {
+        this.transaction$.next(transaction);
+      });
+    console.log(this.echo);
+    return this.transaction$.asObservable();
+  }
+
+  leaveNewTransactionChannel(id) {
+    this.echo.leave('transactions.' + id);
   }
 }

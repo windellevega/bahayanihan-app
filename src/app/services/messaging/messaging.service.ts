@@ -4,7 +4,6 @@ import Pusher from 'pusher-js';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { IMessage } from 'src/app/interfaces/message.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +12,7 @@ export class MessagingService {
   echo: any;
   message$ = new BehaviorSubject<any>('');
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  constructor(private httpClient: HttpClient) {
     const pusher = Pusher;
     this.echo = new Echo({
       broadcaster: 'pusher',
@@ -27,7 +24,7 @@ export class MessagingService {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('access_token')
         },
-    },
+      },
     });
   }
 
