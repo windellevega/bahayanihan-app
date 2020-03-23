@@ -14,7 +14,7 @@ import { AlertController, NavController } from '@ionic/angular';
 export class WorkerTabsPage {
 
   conversationsWithUnreadCount = 0;
-  userId = this.userAuthService.getUserIdFomToken();
+  userId = 0;
   messagingUserSubscription: any;
   newTransactionSubscription: any;
 
@@ -26,6 +26,7 @@ export class WorkerTabsPage {
     private transactionService: TransactionService) { }
 
   ionViewWillEnter() {
+    this.userId = this.userAuthService.getUserIdFomToken();
     this.updateUserLocation();
     this.getConversationsWithUnread();
     this.listenToMessagingUserChannel(this.userId);

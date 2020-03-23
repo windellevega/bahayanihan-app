@@ -65,7 +65,7 @@ export class TransactionsTabPage {
           console.log(transaction);
           const alert = await this.alertController.create({
             header: 'New Task Received',
-            message: 'A user has requested for your ' + transaction.skill.skill_name + 'service.',
+            message: 'A user has requested for your ' + transaction.skill.skill_name.toLowerCase() + ' service.',
             buttons: [
               {
                 text: 'View Task',
@@ -82,6 +82,8 @@ export class TransactionsTabPage {
   }
 
   ionViewWillLeave() {
-    this.transactionSubscription.unsubscribe();
+    if (this.isWorker === '1') {
+      this.transactionSubscription.unsubscribe();
+    }
   }
 }

@@ -15,7 +15,7 @@ export class TabsPage {
   map: any;
   conversationsWithUnreadCount = 0;
   messagingUserSubscription: any;
-  userId = this.userAuthService.getUserIdFomToken();
+  userId = 0;
 
   constructor(
     private userService: UserService,
@@ -24,6 +24,7 @@ export class TabsPage {
     private userAuthService: UserAuthService) { }
 
   ionViewWillEnter() {
+    this.userId = this.userAuthService.getUserIdFomToken();
     this.updateUserLocation();
     this.getConversationsWithUnread();
     this.listenToMessagingUserChannel(this.userId);

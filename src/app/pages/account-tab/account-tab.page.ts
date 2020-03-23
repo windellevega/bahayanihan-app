@@ -97,7 +97,7 @@ export class AccountTabPage {
           console.log(transaction);
           const alert = await this.alertController.create({
             header: 'New Task Received',
-            message: 'A user has requested for your ' + transaction.skill.skill_name + 'service.',
+            message: 'A user has requested for your ' + transaction.skill.skill_name.toLowerCase() + ' service.',
             buttons: [
               {
                 text: 'View Later',
