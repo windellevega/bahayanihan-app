@@ -14,6 +14,10 @@ import { AlertController, NavController } from '@ionic/angular';
 export class WorkerTabsPage {
 
   conversationsWithUnreadCount = 0;
+  userId = this.userAuthService.getUserIdFomToken();
+  messagingUserSubscription: any;
+  newTransactionSubscription: any;
+
   constructor(
     private userService: UserService,
     private geo: Geolocation,
@@ -24,9 +28,8 @@ export class WorkerTabsPage {
   ionViewWillEnter() {
     this.updateUserLocation();
     this.getConversationsWithUnread();
-    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
-    this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
-    this.listenToNewTransactionChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToMessagingUserChannel(this.userId);
+    this.listenToNewTransactionChannel(this.userId);
   }
 
   updateUserLocation() {
@@ -47,7 +50,7 @@ export class WorkerTabsPage {
   }
 
   listenToMessagingUserChannel(userId) {
-    this.messagingService.listenNewMessageUserChannel(userId)
+    this.messagingUserSubscription = this.messagingService.listenNewMessageUserChannel(userId)
       .subscribe(message => {
         if (message !== '') {
           this.getConversationsWithUnread();
@@ -56,7 +59,14 @@ export class WorkerTabsPage {
   }
 
   listenToNewTransactionChannel(userId) {
-    this.transactionService.listenNewTransactionChannel(userId)
+    this.newTransactionSubscription = this.transactionService.listenNewTransactionChannel(userId)
       .subscribe();
+  }
+
+  ionViewWillLeave() {
+    this.messagingService.leaveNewMessageUserChannel(this.userId);
+    this.messagingUserSubscription.unsubscribe();
+    this.transactionService.leaveNewTransactionChannel(this.userId);
+    this.newTransactionSubscription.unsubscribe();
   }
 }

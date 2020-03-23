@@ -14,6 +14,8 @@ export class TabsPage {
   long: any;
   map: any;
   conversationsWithUnreadCount = 0;
+  messagingUserSubscription: any;
+  userId = this.userAuthService.getUserIdFomToken();
 
   constructor(
     private userService: UserService,
@@ -24,8 +26,7 @@ export class TabsPage {
   ionViewWillEnter() {
     this.updateUserLocation();
     this.getConversationsWithUnread();
-    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
-    this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToMessagingUserChannel(this.userId);
   }
 
   updateUserLocation() {
@@ -46,7 +47,7 @@ export class TabsPage {
   }
 
   listenToMessagingUserChannel(userId) {
-    this.messagingService.listenNewMessageUserChannel(userId)
+    this.messagingUserSubscription = this.messagingService.listenNewMessageUserChannel(userId)
       .subscribe(message => {
         if (message !== '') {
           this.getConversationsWithUnread();
@@ -55,6 +56,7 @@ export class TabsPage {
   }
 
   ionViewWillLeave() {
-    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
+    this.messagingService.leaveNewMessageUserChannel(this.userId);
+    this.messagingUserSubscription.unsubscribe();
   }
 }

@@ -17,6 +17,7 @@ export class MessagingPage {
   otherUserFirstname = '';
   otherUserPic = '';
   messages: IMessage[] = [];
+  messagingConversationSubscription: any;
 
   constructor(
     private messagingService: MessagingService,
@@ -34,7 +35,7 @@ export class MessagingPage {
     this.otherUserPic = this.activatedRoute.snapshot.queryParamMap.get('otherUserPic');
 
     if (this.conversationId !== 0) {
-      this.listenToMessagingConversationChannel();
+      this.listenToMessagingConversationChannel(this.conversationId);
       this.getMessages();
       this.markMessagesAsRead(this.conversationId, this.toUserId);
     }
@@ -56,20 +57,20 @@ export class MessagingPage {
       });
   }
 
-  listenToMessagingConversationChannel() {
-    this.messagingService.listenNewMessageConversationChannel(this.conversationId)
+  listenToMessagingConversationChannel(conversationId) {
+    this.messagingConversationSubscription = this.messagingService.listenNewMessageConversationChannel(conversationId)
       .subscribe(message => {
-          if (message !== '') {
+        if (message !== '') {
+          console.log(message);
+          if (message.from_user_id !== this.fromUserId) {
             console.log(message);
-            if (message.from_user_id !== this.fromUserId) {
-              console.log(message);
-              this.messages.push(message);
-              this.markMessagesAsRead(this.conversationId, this.toUserId);
-            }
-            setTimeout(() => {
-              this.content.scrollToBottom(200);
-            });
+            this.messages.push(message);
+            this.markMessagesAsRead(this.conversationId, this.toUserId);
           }
+          setTimeout(() => {
+            this.content.scrollToBottom(200);
+          });
+        }
       });
   }
 
@@ -118,5 +119,6 @@ export class MessagingPage {
 
   ionViewWillLeave() {
     this.messagingService.leaveNewMessageConversationChannel(this.conversationId);
+    this.messagingConversationSubscription.unsubscribe();
   }
 }

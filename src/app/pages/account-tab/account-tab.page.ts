@@ -19,6 +19,7 @@ export class AccountTabPage {
   userProfile: IUser;
   isWorker: any;
   transactionSubscription: any;
+  messagingUserSubscription: any;
 
   constructor(
     private userAuthService: UserAuthService,
@@ -34,11 +35,10 @@ export class AccountTabPage {
     this.isWorker = localStorage.getItem('is_worker');
     this.getOwnProfile();
     this.getConversationsWithUnread();
-    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
-    this.listenToMessagingUserChannel(this.userAuthService.getUserIdFomToken());
+    this.listenToMessagingUserChannel();
 
     if (this.isWorker === '1') {
-      this.listenToNewTransactionChannel(this.userAuthService.getUserIdFomToken());
+      this.listenToNewTransactionChannel();
     }
   }
 
@@ -76,12 +76,13 @@ export class AccountTabPage {
   getConversationsWithUnread() {
     this.messagingService.getConversationsWithUnread()
       .subscribe(data => {
+        console.log(data.conversations_with_unread);
         this.messageLogsCount = data.conversations_with_unread;
       });
   }
 
-  listenToMessagingUserChannel(userId) {
-    this.messagingService.listenNewMessageUserChannel(userId)
+  listenToMessagingUserChannel() {
+    this.messagingUserSubscription = this.messagingService.messageUser$
       .subscribe(message => {
         if (message !== '') {
           this.getConversationsWithUnread();
@@ -89,7 +90,7 @@ export class AccountTabPage {
       });
   }
 
-  listenToNewTransactionChannel(userId) {
+  listenToNewTransactionChannel() {
     this.transactionSubscription = this.transactionService.transaction$
       .subscribe(async transaction => {
         if (transaction !== '') {
@@ -118,7 +119,9 @@ export class AccountTabPage {
   }
 
   ionViewWillLeave() {
-    this.messagingService.leaveNewMessageUserChannel(this.userAuthService.getUserIdFomToken());
-    this.transactionSubscription.unsubscribe();
+    if (this.isWorker === '1') {
+      this.transactionSubscription.unsubscribe();
+    }
+    this.messagingUserSubscription.unsubscribe();
   }
 }

@@ -19,6 +19,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user/user.service';
 import { TransactionService } from './services/transaction/transaction.service';
+import { MessagingService } from './services/messaging/messaging.service';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { TransactionService } from './services/transaction/transaction.service';
     AuthGuard,
     RoleGuard,
     TransactionService,
+    MessagingService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

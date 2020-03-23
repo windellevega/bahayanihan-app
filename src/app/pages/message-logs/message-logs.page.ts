@@ -12,6 +12,7 @@ export class MessageLogsPage {
   conversations: any;
   userId = 0;
   isWorker: any;
+  messageUserSubscription: any;
 
   constructor(
     private messagingService: MessagingService,
@@ -33,7 +34,7 @@ export class MessageLogsPage {
         console.log(data.conversations);
         this.userId = data.id;
         this.conversations = data.conversations;
-        this.listenToMessagingUserChannel(data.id);
+        this.listenToMessagingUserChannel(this.userId);
         this.hideConversationsLoading();
       });
   }
@@ -65,8 +66,9 @@ export class MessageLogsPage {
   }
 
   listenToMessagingUserChannel(userId) {
-    this.messagingService.listenNewMessageUserChannel(userId)
+    this.messageUserSubscription = this.messagingService.listenNewMessageUserChannel(userId)
       .subscribe(message => {
+        console.log(message);
         if (message !== '') {
           this.conversations.find(conversation => {
             if (conversation.id === message.conversation_id && conversation.latest_message.id !== message.id) {
@@ -80,5 +82,6 @@ export class MessageLogsPage {
 
   ionViewWillLeave() {
     this.messagingService.leaveNewMessageUserChannel(this.userId);
+    this.messageUserSubscription.unsubscribe();
   }
 }

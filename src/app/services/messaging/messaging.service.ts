@@ -10,7 +10,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class MessagingService {
   echo: any;
-  message$ = new BehaviorSubject<any>('');
+  messageConversation$ = new BehaviorSubject<any>('');
+  messageUser$ = new BehaviorSubject<any>('');
 
   constructor(private httpClient: HttpClient) {
     const pusher = Pusher;
@@ -32,20 +33,20 @@ export class MessagingService {
     console.log('Listening to conversation.' + id + ' channel...');
     this.echo.private('conversation.' + id)
       .listen('NewMessageConversation', (message) => {
-        this.message$.next(message);
+        this.messageConversation$.next(message);
       });
     console.log(this.echo);
-    return this.message$.asObservable();
+    return this.messageConversation$.asObservable();
   }
 
   listenNewMessageUserChannel(id): Observable<any> {
     console.log('Listening to message-log.' + id + ' channel...');
     this.echo.private('message-log.' + id)
       .listen('NewMessageUser', (message) => {
-        this.message$.next(message);
+        this.messageUser$.next(message);
       });
     console.log(this.echo);
-    return this.message$.asObservable();
+    return this.messageUser$.asObservable();
   }
 
   leaveNewMessageConversationChannel(id) {
