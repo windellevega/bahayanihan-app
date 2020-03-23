@@ -4,6 +4,7 @@ import Pusher from 'pusher-js';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { UserAuthService } from '../auth/user-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class MessagingService {
   messageConversation$ = new BehaviorSubject<any>('');
   messageUser$ = new BehaviorSubject<any>('');
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private userAuthService: UserAuthService) {
     const pusher = Pusher;
     this.echo = new Echo({
       broadcaster: 'pusher',
@@ -21,15 +24,11 @@ export class MessagingService {
       cluster: 'ap1',
       authEndpoint: environment.apiUrl + '/broadcasting/auth',
       encrypted: true,
-      auth: {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access_token')
-        },
-      },
     });
   }
 
   listenNewMessageConversationChannel(id): Observable<any> {
+    this.echo.connector.pusher.config.auth.headers.Authorization = 'Bearer ' + this.userAuthService.getToken();
     console.log('Listening to conversation.' + id + ' channel...');
     this.echo.private('conversation.' + id)
       .listen('NewMessageConversation', (message) => {
@@ -40,6 +39,7 @@ export class MessagingService {
   }
 
   listenNewMessageUserChannel(id): Observable<any> {
+    this.echo.connector.pusher.config.auth.headers.Authorization = 'Bearer ' + this.userAuthService.getToken();
     console.log('Listening to message-log.' + id + ' channel...');
     this.echo.private('message-log.' + id)
       .listen('NewMessageUser', (message) => {

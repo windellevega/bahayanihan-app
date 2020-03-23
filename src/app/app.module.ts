@@ -5,7 +5,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/auth/token.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,10 +18,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './services/user/user.service';
 import { TransactionService } from './services/transaction/transaction.service';
 import { MessagingService } from './services/messaging/messaging.service';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +32,11 @@ import { MessagingService } from './services/messaging/messaging.service';
     FormsModule,
     ReactiveFormsModule],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     Geolocation,
     AndroidPermissions,
     LocationAccuracy,

@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
+import { UserAuthService } from '../auth/user-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,16 @@ export class TransactionService {
   echo: any;
   transaction$ = new BehaviorSubject<any>('');
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private userAuthService: UserAuthService) {
     const pusher = Pusher;
     this.echo = new Echo({
       broadcaster: 'pusher',
       key: '5d48753513e0ef60a4d1',
       cluster: 'ap1',
       authEndpoint: environment.apiUrl + '/broadcasting/auth',
-      encrypted: true,
-      auth: {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access_token')
-        },
-      },
+      encrypted: true
     });
   }
 
@@ -59,6 +57,7 @@ export class TransactionService {
   }
 
   listenNewTransactionChannel(id): Observable<any> {
+    this.echo.connector.pusher.config.auth.headers.Authorization = 'Bearer ' + this.userAuthService.getToken();
     console.log('Listening to transactions.' + id + ' channel...');
     this.echo.private('transactions.' + id)
       .listen('NewTransaction', (transaction) => {
