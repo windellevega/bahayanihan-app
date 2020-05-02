@@ -17,15 +17,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'map-tab/:skillId',
-        children: [
-          {
-            path: '',
-            loadChildren: '../map-tab/map-tab.module#MapTabPageModule'
-          }
-        ]
-      },
-      {
         path: 'map-tab',
         children: [
           {

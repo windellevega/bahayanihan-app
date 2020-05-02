@@ -33,12 +33,15 @@ export class TransactionFormPage {
       });
     }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.workerInfo = history.state.workerInfo;
 
     if (history.state.skillNeeded !== 0) {
       this.skillNeeded = String(history.state.skillNeeded);
-      this.getSkillCost();
+      setTimeout( () => {
+        this.transactionForm.get('job_type').setValue(this.skillNeeded);
+        this.getSkillCost();
+      });
     }
 
     this.geo.getCurrentPosition().then(pos => {

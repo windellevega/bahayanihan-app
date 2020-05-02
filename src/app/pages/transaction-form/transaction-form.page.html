@@ -17,8 +17,8 @@
 
       <ion-item>
         <ion-label position="stacked">Job Types</ion-label>
-        <ion-select formControlName="job_type" (ionChange)="getSkillCost()" [(ngModel)]="skillNeeded">
-          <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}" (selected)="skill.id === 7" >{{ skill.skill_name }}</ion-select-option>
+        <ion-select formControlName="job_type" (ionChange)="getSkillCost()">
+          <ion-select-option *ngFor="let skill of workerInfo?.skills" value="{{ skill.id }}">{{ skill.skill_name }}</ion-select-option>
         </ion-select>
       </ion-item>
       

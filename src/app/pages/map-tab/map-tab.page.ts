@@ -43,6 +43,7 @@ export class MapTabPage {
   long: any;
   skillId = 0;
   userInfo: IUser;
+  queryParamMapSubscription: any;
 
   constructor(
     public geo: Geolocation,
@@ -54,11 +55,13 @@ export class MapTabPage {
 
   ionViewWillEnter() {
     this.getOwnProfile();
-    this.skillId = Number(this.activatedRoute.snapshot.queryParamMap.get('skillId'));
-    this.activatedRoute.queryParamMap.subscribe(queryParams => {
-      this.skillId = Number(queryParams.get('skillId'));
-    });
+
+    if(history.state.skillId) {
+      this.skillId = history.state.skillId;
+    }
+    
     this.loadLeafletMap();
+    console.log(this.skillId);
     //this.showWorkerInfoModal();
   }
 

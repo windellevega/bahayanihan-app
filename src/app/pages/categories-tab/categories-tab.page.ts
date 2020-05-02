@@ -24,7 +24,9 @@ export class CategoriesTabPage {
   }
 
   loadMap(skillId) {
-    this.router.navigate(['/main/tabs/map-tab'], { queryParams: { skillId }});
+    this.router.navigate(['/main/tabs/map-tab'], { 
+      state: { skillId }
+    });
   }
 
   async loadSkills() {
