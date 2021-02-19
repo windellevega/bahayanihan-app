@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { TransactionLocationModalPage } from './transaction-location-modal.page';
@@ -7,7 +7,7 @@ describe('TransactionLocationModalPage', () => {
   let component: TransactionLocationModalPage;
   let fixture: ComponentFixture<TransactionLocationModalPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TransactionLocationModalPage ],
       imports: [IonicModule.forRoot()]

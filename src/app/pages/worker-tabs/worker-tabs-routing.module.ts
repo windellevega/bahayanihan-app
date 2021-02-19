@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../transactions-tab/transactions-tab.module#TransactionsTabPageModule'
+            loadChildren: () => import('../transactions-tab/transactions-tab.module').then(m => m.TransactionsTabPageModule)
           }
         ]
       },
@@ -22,7 +22,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../account-tab/account-tab.module#AccountTabPageModule'
+            loadChildren: () => import('../account-tab/account-tab.module').then(m => m.AccountTabPageModule)
           }
         ]
       },

@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MapTabPage } from './map-tab.page';
 
@@ -7,7 +7,7 @@ describe('MapTabPage', () => {
   let component: MapTabPage;
   let fixture: ComponentFixture<MapTabPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MapTabPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
