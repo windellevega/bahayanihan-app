@@ -5,18 +5,18 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://evening-mesa-93885.herokuapp.com',
-  // apiUrl: 'http://34.68.252.39', //GCP Server
-  apiUrl: 'http://localhost:8000', 
+  apiUrl: 'http://34.68.252.39', //GCP Server
+  // apiUrl: 'http://localhost:8000', 
   //apiUrl: 'http://ec2-3-17-5-56.us-east-2.compute.amazonaws.com',
   // oauth: {
   //   clientId: '2', // Heroku and Localhost API
   //   clientSecret: 'kwuNG08lA3y9zhQFD8rgytWvL7GJyij1DASJ25FR'
   // }
   oauth: {
-    // clientId: '2', // GCP Server
-    // clientSecret: 'tDc7hEvRly7RgpBOlGT6OtNne1no98FP39NaZpkC'
-    clientId: '1', // GCP Server
-    clientSecret: 'ZZQcopDEIHYzoxr3FtcHZ1IhEJwEnY7aPrQshgmd'
+    clientId: '2', // GCP Server
+    clientSecret: 'tDc7hEvRly7RgpBOlGT6OtNne1no98FP39NaZpkC'
+    // clientId: '1', // GCP Server
+    // clientSecret: 'ZZQcopDEIHYzoxr3FtcHZ1IhEJwEnY7aPrQshgmd'
   }
 };
 
