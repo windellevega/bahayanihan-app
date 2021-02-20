@@ -15,7 +15,7 @@ export const environment = {
   oauth: {
     clientId: '2', // GCP Server
     clientSecret: 'tDc7hEvRly7RgpBOlGT6OtNne1no98FP39NaZpkC'
-    // clientId: '1', // GCP Server
+    // clientId: '1', //localhost
     // clientSecret: 'ZZQcopDEIHYzoxr3FtcHZ1IhEJwEnY7aPrQshgmd'
   }
 };

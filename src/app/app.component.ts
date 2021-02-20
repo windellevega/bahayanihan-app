@@ -23,7 +23,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.platform.is('hybrid')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.checkGPSPermission();
         this.statusBar.styleDefault();
         this.splashScreen.hide();
