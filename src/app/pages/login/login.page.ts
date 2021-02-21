@@ -44,6 +44,7 @@ export class LoginPage {
       this.usernameOrEmail = '';
       this.password = '';
       this.hideLoggingInLoading();
+      alert(status);
     });
   }
 
