@@ -26,7 +26,7 @@ export class UserAuthService {
           localStorage.setItem('refresh_token', res.refresh_token);
         }),
         catchError(error => {
-          //alert(JSON.stringify(error));
+          alert(JSON.stringify(error));
           return of(false);
         })
       );
