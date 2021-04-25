@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://evening-mesa-93885.herokuapp.com',
-  apiUrl: 'http://34.68.252.39', //GCP Server
+  apiUrl: 'http://35.193.196.62', //GCP Server
   // apiUrl: 'http://localhost:8000', 
   //apiUrl: 'http://ec2-3-17-5-56.us-east-2.compute.amazonaws.com',
   // oauth: {
